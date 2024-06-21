@@ -113,6 +113,7 @@ const Home = () => {
                     width="800px"
                     height="auto"
                     controls
+                    controlsList="nodownload"
 
                 >
                     <source src={language === 'english' ? videoUrls.promo : videoUrls.promo} type="video/mp4" />

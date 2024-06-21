@@ -28,7 +28,7 @@ const FAQ = () => {
                     <p class="question">{language === 'english' ? "If I want all my athletes to take this, how can I ensure they have completed the program?" : "Si je veux que tous mes athlètes suivent ce programme, comment puis-je m'assurer qu'ils l'ont terminé ?"}</p>
                     <div class="line-divider"></div>
                     <div class="answer">
-                        <p>{language === 'english' ? "There are two ways. After viewing all videos in order, athletes will receive a certificate of completion via the email address they used to register. If you would like further compliance tracking, you can contact us at" : "Il y a deux façons. Après avoir visionné toutes les vidéos dans l'ordre, les athlètes recevront un certificat de réussite à l'adresse e-mail qu'ils ont utilisée pour s'inscrire. Si vous souhaitez un suivi de la conformité supplémentaire, vous pouvez nous contacter à l'adresse"}</p>
+                        <p>{language === 'english' ? "There are two ways. After viewing all videos in order, athletes will receive a certificate of completion via the email address they used to register. If you would like further compliance tracking, you can contact us at tony@verduredigital.com" : "Il y a deux façons. Après avoir visionné toutes les vidéos dans l'ordre, les athlètes recevront un certificat de réussite à l'adresse e-mail qu'ils ont utilisée pour s'inscrire. Si vous souhaitez un suivi de la conformité supplémentaire, vous pouvez nous contacter à l'adresse tony@verduredigital.com"}</p>
                     </div>
 
 
@@ -80,7 +80,7 @@ const FAQ = () => {
                     <p class="question">{language === 'english' ? "I can't seem to sign up or log in. How can I get help?" : "Je ne peux pas m'inscrire ou me connecter. Comment puis-je obtenir de l'aide ?"}</p>
                     <div class="line-divider"></div>
                     <div class="answer">
-                        <p>{language === 'english' ? "If you are having issues registering, signing up or logging in, please contact Safe Sport For Youths at: (enter contact info)" : "Si vous rencontrez des problèmes pour vous inscrire, vous connecter ou vous connecter, veuillez contacter Safe Sport For Youths à : (entrez les coordonnées de contact)"}</p>
+                        <p>{language === 'english' ? "If you are having issues registering, signing up or logging in, please contact Safe Sport For Youths at: (hello@safesportforyouth.org)" : "Si vous rencontrez des problèmes pour vous inscrire, vous connecter ou vous connecter, veuillez contacter Safe Sport For Youths à : (hello@safesportforyouth.org)"}</p>
                     </div>
 
                 </div>
@@ -90,7 +90,7 @@ const FAQ = () => {
                     <p class="question">{language === 'english' ? "I did not receive my certificate of completion. What can I do?" : "Je n'ai pas reçu mon certificat de réussite. Que puis-je faire ?"}</p>
                     <div class="line-divider"></div>
                     <div class="answer">
-                        <p>{language === 'english' ? "If you 'unlocked' and watched all videos the certification of completion was sent to the email address you used to register. Please ensure you check your spam or junk mail folders as they sometimes end up there. If you still can't find your certificate, please contact Safe Sport for Youth for further support at: (enter contact info)" : "Si vous avez 'débloqué' et regardé toutes les vidéos, le certificat de réussite a été envoyé à l'adresse e-mail que vous avez utilisée pour vous inscrire. Veuillez vous assurer de vérifier vos dossiers de spam ou de courrier indésirable car ils finissent parfois là-bas. Si vous ne trouvez toujours pas votre certificat, veuillez contacter Safe Sport for Youth pour obtenir un soutien supplémentaire à : (entrez les coordonnées de contact)"}</p>
+                        <p>{language === 'english' ? "If you 'unlocked' and watched all videos the certification of completion was sent to the email address you used to register. Please ensure you check your spam or junk mail folders as they sometimes end up there. If you still can't find your certificate, please contact Safe Sport for Youth for further support at: (hello@safesportforyouth.org)" : "Si vous avez 'débloqué' et regardé toutes les vidéos, le certificat de réussite a été envoyé à l'adresse e-mail que vous avez utilisée pour vous inscrire. Veuillez vous assurer de vérifier vos dossiers de spam ou de courrier indésirable car ils finissent parfois là-bas. Si vous ne trouvez toujours pas votre certificat, veuillez contacter Safe Sport for Youth pour obtenir un soutien supplémentaire à : (hello@safesportforyouth.org)"}</p>
                     </div>
 
                 </div>

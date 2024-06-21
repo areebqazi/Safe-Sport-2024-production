@@ -67,7 +67,7 @@ function App() {
                     >
                       {language === "english"
                         ? "The Athlete’s Voice"
-                        : "La Voix de l’Athlète"}
+                        : "Écoutez vos Héros"}
                     </NavLink>
                     <NavLink
                       className="content-link"
@@ -118,7 +118,7 @@ function App() {
                         onClick={toggleMobileMenu}
                         to="/HeroMsg"
                       >
-                        {language === "english" ? "The Athlete's Voice" : "La Voix de l'Athlète"}
+                        {language === "english" ? "The Athlete's Voice" : "Écoutez vos Héros"}
                       </NavLink>
                       <NavLink
                         className="content-link"

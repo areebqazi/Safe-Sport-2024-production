@@ -104,6 +104,7 @@ const HeroMsg = () => {
                                 width="750"
                                 height="500"
                                 controls
+                                controlsList="nodownload"
 
                             >
                                 <source src={language === 'english' ? videoUrls.damian : videoUrls.damian} type="video/mp4" />
@@ -130,6 +131,7 @@ const HeroMsg = () => {
                                 width="750"
                                 height="500"
                                 controls
+                                controlsList="nodownload"
 
                             >
                                 <source src={language === 'english' ? videoUrls.marissa : videoUrls.marissa} type="video/mp4" />
@@ -150,6 +152,7 @@ const HeroMsg = () => {
                                 width="750"
                                 height="500"
                                 controls
+                                controlsList="nodownload"
 
                             >
 
@@ -170,6 +173,7 @@ const HeroMsg = () => {
                                 width="750"
                                 height="500"
                                 controls
+                                controlsList="nodownload"
 
                             >
                                 <source src={language === 'english' ? videoUrls.javier : videoUrls.javier} type="video/mp4" />
@@ -189,6 +193,7 @@ const HeroMsg = () => {
                                 width="750"
                                 height="500"
                                 controls
+                                controlsList="nodownload"
                             // onPlay={() => handlePlay('ella')}
                             >
                                 <source src={language === 'english' ? videoUrls.ella : videoUrls.ella} type="video/mp4" />
@@ -209,6 +214,7 @@ const HeroMsg = () => {
                                 width="750"
                                 height="500"
                                 controls
+                                controlsList="nodownload"
                             // onPlay={() => handlePlay('ella')}
                             >
                                 <source src={language === 'english' ? videoUrls.marie : videoUrls.marie} type="video/mp4" />

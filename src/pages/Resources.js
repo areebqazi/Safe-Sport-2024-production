@@ -90,6 +90,8 @@ const Resources = () => {
                     <p className='logo-title'>Abuse Free Sport</p>
                     {/*  eslint-disable-next-line */}
                     <a href='https://abuse-free-sport.ca/' target="_blank"><img className="abuse-free image-links1" src={AbuseFreeSport} alt="Abuse Free Sport" ></img> </a>
+                    <p className='logo-title'>Email: info@abuse-free-sport.ca/info@sport-sans-abus.ca</p>
+                    <p className='logo-title'>Text: 77678</p>
 
                 </div>
 
