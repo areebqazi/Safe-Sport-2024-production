@@ -1,0 +1,81 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-safesport2024-dev-152331-authRole",
+      "UnauthRoleArn": "arn:aws:iam::009365261521:role/amplify-safesport2024-dev-152331-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::009365261521:role/amplify-safesport2024-dev-152331-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-safesport2024-dev-152331-deployment",
+      "UnauthRoleName": "amplify-safesport2024-dev-152331-unauthRole",
+      "StackName": "amplify-safesport2024-dev-152331",
+      "StackId": "arn:aws:cloudformation:us-east-1:009365261521:stack/amplify-safesport2024-dev-152331/6f24f210-c464-11ee-abb0-0e097c1c981f",
+      "AmplifyAppId": "d1sspm9y4rh45m"
+    }
+  },
+  "api": {
+    "safesport2024": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            },
+            "authenticationType": "API_KEY"
+          }
+        },
+        "GraphQLAPIIdOutput": "wfeiheu6p5awze4wptljwe6ewa",
+        "GraphQLAPIEndpointOutput": "https://prxfleimqbh5zht4y7cqls227q.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-dt2sed3eb5cpfa4ejkmzvvbfyi"
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync",
+      "lastPushTimeStamp": "2024-06-21T21:16:21.462Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-safesport2024-dev-152331-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apisafesport2024"
+      }
+    }
+  },
+  "auth": {
+    "safesport2024a60dfb99": {
+      "service": "Cognito",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "output": {
+        "UserPoolId": "us-east-1_1zyODFtlr",
+        "UserPoolName": "SafeSportUsers",
+        "AppClientID": "224isoa48jqgj34ht1m38jq5dd",
+        "AppClientIDWeb": "224isoa48jqgj34ht1m38jq5dd"
+      },
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL",
+          "GIVEN_NAME",
+          "FAMILY_NAME"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_UPPERCASE",
+            "REQUIRES_NUMBERS"
+          ]
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "lastPushTimeStamp": "2024-04-18T17:53:20.088Z"
+    }
+  }
+}
