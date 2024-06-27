@@ -91,7 +91,7 @@ const Resources = () => {
                     {/*  eslint-disable-next-line */}
                     <a href='https://abuse-free-sport.ca/' target="_blank"><img className="abuse-free image-links1" src={AbuseFreeSport} alt="Abuse Free Sport" ></img> </a>
                     <p className='logo-title'>Email: info@abuse-free-sport.ca/info@sport-sans-abus.ca</p>
-                    <p className='logo-title'>Text: 77678</p>
+                    <p className='logo-title'>Text: 1-888-83SPORT (77678)</p>
 
                 </div>
 

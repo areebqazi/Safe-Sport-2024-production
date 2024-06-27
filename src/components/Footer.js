@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Footer.css';
+import englishLogo from '../assets/logos/safesportlogo.png';
+import frenchLogo from '../assets/logos/safesportlogoFrench.png';
+import { LanguageContext } from '../LanguageContext';
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Avenir:wght@100;700&display=swap"></link>
 
 function Footer() {
+    const { language } = useContext(LanguageContext);
+
     return (
         <footer className="footer">
             <div className="footer-content">
@@ -23,7 +28,12 @@ function Footer() {
 
                 {/* Center Section (Main Logo) */}
                 <div className="footer-logo">
-                    <img src={require('../assets/logos/safesportlogo.png')} alt="Main Logo" />
+                    {/* <img src={require('../assets/logos/safesportlogo.png')} alt="Main Logo" /> */}
+                    <img 
+                    src={language === 'english' ? englishLogo : frenchLogo} 
+                    className="logo" 
+                    alt="Main Logo" 
+                />
                 </div>
 
                 {/* Right Section (Email and Phone) */}

@@ -74,7 +74,7 @@ const HeroMsg = () => {
         <InView>
             <div className='messages-page'>
                 <div className='page-title-div'>
-                    <h1 className='page-title'>{language === 'english' ? 'Hear from your Heroes' : 'Écoutez vos Héros'}</h1>
+                    <h1 className='page-title'>{language === 'english' ? `The Athlete's Voice` : 'Écoutez vos Héros'}</h1>
 
                 </div>
                 {/* <div className='lang-button-div'>
