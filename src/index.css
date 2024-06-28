@@ -183,7 +183,7 @@ footer {
   border: none;
 
   border-radius: 5px;
-
+  margin: 2px;
   transition: all.2s ease-in-out;
   font-size: 18px;
   cursor: pointer !important;
@@ -191,7 +191,7 @@ footer {
 
 .lang-button-div {
   position: absolute;
-  background-color: #FF3131 !important;
+  /* background-color: #FF3131 !important; */
   color: whitesmoke;
   border: none;
   min-width: 160px;
@@ -201,13 +201,16 @@ footer {
   transition: all.2s ease-in-out;
   font-size: 18px !important;
   cursor: pointer !important;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 75px;
 }
 
 .lang-button-div:hover {
   position: absolute;
 
-  transform: scale(1.15);
+  /* transform: scale(1.15); */
 }
 
 .signOut-btn {
@@ -229,7 +232,7 @@ footer {
 .signOut-btn:hover {
   position: absolute;
 
-  transform: scale(1.15);
+  /* transform: scale(1.15); */
 
 }
 

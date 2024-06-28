@@ -1,0 +1,54 @@
+.auth-container {
+  width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  border :1px solid black;
+  background-color: white;
+}
+
+.toggle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.toggle button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  font-size: 16px;
+  height: 40px;
+}
+
+.toggle .active {
+  background-color: #ff3131;
+  color: white;
+}
+
+.form {
+  margin-top: 20px;
+}
+
+.form h2 {
+  text-align: center;
+}
+
+.form input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #ff3131;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

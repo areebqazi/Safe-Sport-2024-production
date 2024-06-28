@@ -1,94 +1,140 @@
-import './Home.css';
-import { Authenticator } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
-import './EducationPages.css';
-import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { Auth } from 'aws-amplify';
-import { LanguageContext } from '../LanguageContext';
-
-
-
-
-
+import "./Home.css";
+// import { Authenticator } from '@aws-amplify/ui-react';
+import "@aws-amplify/ui-react/styles.css";
+// import './EducationPages.css';
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import { Auth } from "aws-amplify";
+import { LanguageContext } from "../LanguageContext";
+import "../components/Authenticator.css";
+import axios from "axios";
+import { API } from "../constants";
+import { useNavigate } from "react-router-dom";
 
 
 // const localVideoPath = '../../public/assets/placeholder1.mp4';
 const Home = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
+
+  const [isSignIn, setIsSignIn] = useState(true);
+
+  const [signInData, setSignInData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [signUpData, setSignUpData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    date: "",
+  });
 
 
+  //language handler
+  const { language } = useContext(LanguageContext);
+
+  // const [language, setLanguage] = useState('english');
 
 
+  // Define video URLs based on the selected language
 
-    //language handler 
-    const { language } = useContext(LanguageContext);
+  const englishVideos = {
+    promo:
+      "https://dqdi1yce51qjt.cloudfront.net/english-with-caption/main-promo-eng.mp4",
 
-    // const [language, setLanguage] = useState('english');
-    const [userEmail, setUserEmail] = useState(null);
+    // Include other English video URLs here...
+  };
+  const frenchVideos = {
+    promo:
+      "https://dqdi1yce51qjt.cloudfront.net/french-with-caption/main-promo-french.mp4",
 
-
-    const checkUser = async () => {
-        try {
-            const user = await Auth.currentAuthenticatedUser();
-            // set user state and show alert 
-            setUserEmail(user.attributes.email); // Update userEmail state with user email
-            console.log('Logged in user email:', userEmail);
-        } catch (error) {
-            console.log('Error getting current user', error);
-        }
-    };
-    useEffect(() => {
-        checkUser();
-    }, []);
+    // Include other French video URLs here...
+  };
+  //this switches the videos from englisht to french
+  const videoUrls = language === "english" ? englishVideos : frenchVideos;
+  console.log("Video URLs:", videoUrls);
 
 
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    try {
+      if(signUpData.password !== signUpData.confirmPassword) {
+        alert("Passwords do not match");
+        return;
+      }
+      const { name, email, password,date } = signUpData;
+      if(!name || !email || !password || !date) {
+        alert("Please fill out all fields");
+        return;
+      }
+      const response = await axios.post(`${API}/auth/signup`, {
+        name,
+        email,
+        password,
+      });
+      if(response.status === 201) {
+        alert("Sign up successful");
+        window.location.reload();
+      }else {
+        alert("Error signing up. Please try again.");
+      }
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    // Define video URLs based on the selected language
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      const { email, password } = signInData;
+      if(!email || !password) {
+        alert("Please fill out all fields");
+        return;
+      }
+      const response = await axios.post(`${API}/auth/signin`, { email, password });
+      console.log(response);
+      if(response.status === 200) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+        window.location.reload();
+        // navigate("/education")
+      } else {
+        alert("Invalid credentials");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSignInChange = (e) => {
+    setSignInData({
+      ...signInData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSignUpChange = (e) => {
+    setSignUpData({
+      ...signUpData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
 
-    const englishVideos = {
+  return (
+    <div className="home-page">
+      <div className="page-title-div">
+        <h1 className="page-title">
+          {language === "english"
+            ? "Welcome to the Safe Sport Education for Youth Program"
+            : "Bienvenue au programme d`éducation au sport sécuritaire pour les jeunes"}{" "}
+        </h1>
+        <br></br>
+      </div>
 
-        promo: 'https://dqdi1yce51qjt.cloudfront.net/english-with-caption/main-promo-eng.mp4'
-
-        // Include other English video URLs here...
-    };
-    const frenchVideos = {
-        promo: 'https://dqdi1yce51qjt.cloudfront.net/french-with-caption/main-promo-french.mp4'
-
-        // Include other French video URLs here...
-    };
-    //this switches the videos from englisht to french
-    const videoUrls = language === 'english' ? englishVideos : frenchVideos;
-    console.log('Video URLs:', videoUrls);
-
-    const signUpConfig = {
-        signUpFields: [
-            {
-                label: 'Custom Attribute 1',
-                key: 'customAttribute1',
-                required: true,
-                type: 'string', // Adjust the type based on your attribute
-            },
-            {
-                label: 'Custom Attribute 2',
-                key: 'customAttribute2',
-                required: true,
-                type: 'string', // Adjust the type based on your attribute
-            },
-        ],
-    };
-
-
-
-
-    return (
-        <div className='home-page'>
-            <div className='page-title-div'>
-
-                <h1 className='page-title'>{language === 'english' ? 'Welcome to the Safe Sport Education for Youth Program' : 'Bienvenue au programme d`éducation au sport sécuritaire pour les jeunes'} </h1><br></br>
-            </div>
-
-            <Authenticator signUpAttributes={['given_name', 'family_name', 'birthdate']} className='home-page-authenticator' hideDefault={true}>
+      {/* <Authenticator signUpAttributes={['given_name', 'family_name', 'birthdate']} className='home-page-authenticator' hideDefault={true}>
                 {({ signOut, user }) => (
                     <div className="logout-btn">
                         <button className="signOut-btn" onClick={signOut}>{language === 'english' ? 'Sign Out' : 'Se déconnecter'}</button>
@@ -96,34 +142,128 @@ const Home = () => {
                 )}
 
 
-            </Authenticator>
+            </Authenticator> */}
+      {/* <Authenticator className='home-page-authenticator'/>     */}
+     
+     {!user && <div className="auth-container">
+        <div className="toggle">
+          <button
+            className={isSignIn ? "active" : ""}
+            onClick={() => setIsSignIn(true)}
+          >
+            Sign In
+          </button>
+          <button
+            className={!isSignIn ? "active" : ""}
+            onClick={() => {
+              setIsSignIn(false);
+            }}
+          >
+            Create Account
+          </button>
+        </div>
+        {isSignIn ? (
+          <form className="form">
+            <h2>Sign In</h2>
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              required
+              value={signInData.email}
+              onChange={handleSignInChange}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              required
+              value={signInData.password}
+              onChange={handleSignInChange}
+            />
+            <button type="submit" onClick={handleSignIn}>Sign In</button>
+          </form>
+        ) : (
+          <form className="form">
+            <h2>Create Account</h2>
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              required
+              value={signUpData.email}
+              onChange={handleSignUpChange}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              required
+              value={signUpData.password}
+              onChange={handleSignUpChange}
+            />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              name="confirmPassword"
+              required
+              value={signUpData.confirmPassword}
+              onChange={handleSignUpChange}
+            />
+            <input
+              type="name"
+              placeholder="Given Name"
+              name="name"
+              required
+              value={signUpData.name}
+              onChange={handleSignUpChange}
+            />
+            <input
+              type="date"
+              placeholder="Birthdate"
+              name="date"
+              required
+              value={signUpData.date}
+              onChange={handleSignUpChange}
+            />
 
-            {/* <div className='lang-button-div'>
+            <button type="submit" onClick={handleSignUp}>Create Account</button>
+          </form>
+        )}
+      </div>}
+
+      {/* <div className='lang-button-div'>
                 <button className='mobile-btn-lang' onClick={toggleLanguage}>{language === 'english' ? 'Passer au Français' : 'Switch to English'}</button>
             </div> */}
-            {/* {userEmail ? (
+      {/* {userEmail ? (
                 <div className="user-email-container">
                     <p>Your email: {userEmail}</p>
                 </div>
             ) : null} */}
-            <div className="video-Container" >
-                <video
-                    id='HFYHVideo'
-                    key={language}
-                    width="800px"
-                    height="auto"
-                    controls
-                    controlsList="nodownload"
-
-                >
-                    <source src={language === 'english' ? videoUrls.promo : videoUrls.promo} type="video/mp4" />
-                </video>
-
-            </div>
-            <div className='default-div'>
-                <h2 >{language === 'english' ? 'Safe Sport Education for Youth Overview' : 'Éducation au sport sécuritaire pour les jeunes'} <br></br> </h2>
-            </div>
-            {/* <div className='welcome-statement default-div'>
+      <div className="video-Container">
+        <video
+          id="HFYHVideo"
+          key={language}
+          width="800px"
+          height="auto"
+          controls
+          controlsList="nodownload"
+        >
+          <source
+            src={language === "english" ? videoUrls.promo : videoUrls.promo}
+            type="video/mp4"
+          />
+        </video>
+      </div>
+      <div className="default-div">
+        <h2>
+          {language === "english"
+            ? "Safe Sport Education for Youth Overview"
+            : "Éducation au sport sécuritaire pour les jeunes"}{" "}
+          <br></br>{" "}
+        </h2>
+      </div>
+      {/* <div className='welcome-statement default-div'>
                 <p>{language === 'english' ? `Welcome to Safe Sport Education for Youth! This educational program will provide you with all the tools you need to have a safe and positive sports experience. Safe Sport Education for Youth is brought to you by the National Sports Organizations representing athletics, volleyball, and swimming. These videos are short and all you need to do is watch them. Easy right? Check out the videos and be a part of our new movement called Safe Sport.` : `Bienvenue à l'éducation Safe Sport pour la jeunesse ! Ce programme éducatif vous fournira tous les outils nécessaires pour vivre une expérience sportive sûre et positive. L'éducation Safe Sport pour la jeunesse vous est proposée par les organisations nationales de sports représentant l'athlétisme, le volleyball et la natation. Ces vidéos sont courtes et tout ce que vous avez à faire est de les regarder. Facile non ? Regardez les vidéos et faites partie de notre nouveau mouvement appelé Safe Sport.`}</p>
 
                 <br></br>
@@ -135,15 +275,22 @@ const Home = () => {
                 <p>{language === 'english' ? `Some of the information you hear may be hard to hear and could make you uncomfortable. We've got a page ` : `Certaines des informations que vous entendrez peuvent être difficiles à entendre et peuvent vous mettre mal à l'aise. Nous avons une page `}<Link className='custom-links' to="/resources"> (Resources)</Link>{language === 'english' ? ` with links to some of the support and resources available to help you get through it. There are there to help you.` : ` avec des liens vers certains des soutiens et ressources disponibles pour vous aider à y faire face. Ils sont là pour vous aider.`}</p>
 
             </div> */}
-            <div className='welcome-statement default-div'>
-                <p>{language === 'english' ? `This new Safe Sport Education Program for Youth aged 13-19 provides a comprehensive approach to fostering a safe and respectful sporting environment. This program covers essential topics such as recognizing and reporting abuse, setting boundaries, and promoting healthy relationships within sports communities. Through interactive modules and engaging discussions, participants will gain the knowledge and skills necessary to navigate potential risks and protect themselves and others. It's important to note that some of the information covered may evoke discomfort, and participants are encouraged to seek out support (Visit our Resources Page ` : `Ce nouveau programme d'éducation sur le sport sécuritaire destiné aux jeunes âgés de 13 à 19 ans propose une approche globale pour favoriser un environnement sportif sûr et respectueux. Ce programme couvre des sujets essentiels tels que reconnaître et signaler les abus, fixer des limites et promouvoir des relations saines au sein des communautés sportives. Grâce à des modules interactifs et à des discussions engageantes, les participants acquerront les connaissances et les compétences nécessaires pour gérer les risques potentiels et se protéger ainsi que les autres. Il est important de noter que certaines des informations couvertes peuvent susciter un inconfort, et les participants sont encouragés à rechercher de l'aide (visitez notre page de ressources `}<Link className='custom-links' to="/resources"> {language === 'english' ? `Here` : `Ici`}</Link>{language === 'english' ? ` ) if needed. For those under the age of 13 we strongly suggest you take this training with the support of a parent or guardian. Together, we strive to create a culture of safety and empowerment in sports for all young athletes.` : ` ) si nécessaire. Pour les moins de 13 ans, nous vous suggérons fortement de suivre cette formation avec le soutien d'un parent ou d'un tuteur. Ensemble, nous nous efforçons de créer une culture de sécurité et d'autonomisation dans le sport pour tous les jeunes athlètes.`}</p>
-
-
-
-            </div>
-            <div className='gap-container'>
-            </div>
-            {/* <div className='welcome-statement default-div'>
+      <div className="welcome-statement default-div">
+        <p>
+          {language === "english"
+            ? `This new Safe Sport Education Program for Youth aged 13-19 provides a comprehensive approach to fostering a safe and respectful sporting environment. This program covers essential topics such as recognizing and reporting abuse, setting boundaries, and promoting healthy relationships within sports communities. Through interactive modules and engaging discussions, participants will gain the knowledge and skills necessary to navigate potential risks and protect themselves and others. It's important to note that some of the information covered may evoke discomfort, and participants are encouraged to seek out support (Visit our Resources Page `
+            : `Ce nouveau programme d'éducation sur le sport sécuritaire destiné aux jeunes âgés de 13 à 19 ans propose une approche globale pour favoriser un environnement sportif sûr et respectueux. Ce programme couvre des sujets essentiels tels que reconnaître et signaler les abus, fixer des limites et promouvoir des relations saines au sein des communautés sportives. Grâce à des modules interactifs et à des discussions engageantes, les participants acquerront les connaissances et les compétences nécessaires pour gérer les risques potentiels et se protéger ainsi que les autres. Il est important de noter que certaines des informations couvertes peuvent susciter un inconfort, et les participants sont encouragés à rechercher de l'aide (visitez notre page de ressources `}
+          <Link className="custom-links" to="/resources">
+            {" "}
+            {language === "english" ? `Here` : `Ici`}
+          </Link>
+          {language === "english"
+            ? ` ) if needed. For those under the age of 13 we strongly suggest you take this training with the support of a parent or guardian. Together, we strive to create a culture of safety and empowerment in sports for all young athletes.`
+            : ` ) si nécessaire. Pour les moins de 13 ans, nous vous suggérons fortement de suivre cette formation avec le soutien d'un parent ou d'un tuteur. Ensemble, nous nous efforçons de créer une culture de sécurité et d'autonomisation dans le sport pour tous les jeunes athlètes.`}
+        </p>
+      </div>
+      <div className="gap-container"></div>
+      {/* <div className='welcome-statement default-div'>
                 <p>{language === 'english' ? `So how does the Safe Sport for Youth program work. We kept it simple for anyone to use. Just follow these step by step instructions and be open to learning:` : `Alors, comment fonctionne le programme Safe Sport for Youth. Nous l'avons rendu simple pour que tout le monde puisse l'utiliser. Suivez simplement ces instructions étape par étape et soyez ouvert à l'apprentissage:`}</p>
 
                 <br></br>
@@ -164,11 +311,8 @@ const Home = () => {
 
             </div>
             <div className='gap-container'> */}
-        </div>
-
-    );
+    </div>
+  );
 };
-
-
 
 export default Home;

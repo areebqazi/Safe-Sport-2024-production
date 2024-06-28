@@ -6,7 +6,7 @@ import {
   Route,
   NavLink,
 } from "react-router-dom";
-import { Amplify } from "aws-amplify";
+import {  Amplify } from "aws-amplify";
 import awsExports from "./aws-exports";
 import Home from "./pages/Home";
 import FAQ from "./pages/FAQ";
@@ -17,6 +17,8 @@ import HeroMsg from "./pages/HeroMsg";
 import Footer from "./components/Footer";
 import "bootstrap/dist/css/bootstrap.css";
 import { LanguageProvider, LanguageContext } from "./LanguageContext";
+import axios from "axios";
+import  { API} from "./constants";
 
 Amplify.configure(awsExports);
 
@@ -26,6 +28,16 @@ function App() {
   const toggleMobileMenu = () => {
     setMobileMenuVisible(!mobileMenuVisible);
   };
+  const handleSignOut = async () => {
+    try {
+      const response = await axios.post(`${API}/auth/signout`);
+      localStorage.removeItem("user");
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const user = localStorage.getItem("user");
 
   return (
     <div className="App">
@@ -43,6 +55,11 @@ function App() {
                     >
                       {language === "english" ? "Passer au Français" : "Switch to English"}
                     </button>
+                    {user ? (
+                      <button className="mobile-btn-lang" onClick={handleSignOut}>
+                        Sign Out
+                      </button>
+                    ) : null}
                   </div>
                   <div className="content-desktop">
                     <NavLink

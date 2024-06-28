@@ -207,13 +207,12 @@
 
 .certificate-wrapper-Name {
   position: absolute;
-  font-family: 'Dancing Script', cursive !important;
-  white-space: nowrap !important;
-
-  top: 270px;
-  font-size: 38px !important;
-  transform: translateX(150%) !important;
-
+  font-family: 'Poppins', sans-serif;
+  white-space: nowrap;
+  top: 270px; /* Adjust top position as needed */
+  font-size: 38px;
+  left: 50%; /* Position at the center horizontally */
+  transform: translateX(-50%); /* Center horizontally */
 }
 
 
