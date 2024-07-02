@@ -11,7 +11,6 @@ import axios from "axios";
 import { API } from "../constants";
 import { useNavigate } from "react-router-dom";
 
-
 // const localVideoPath = '../../public/assets/placeholder1.mp4';
 const Home = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -29,14 +28,13 @@ const Home = () => {
     email: "",
     password: "",
     date: "",
+    sport: "",
   });
-
 
   //language handler
   const { language } = useContext(LanguageContext);
 
   // const [language, setLanguage] = useState('english');
-
 
   // Define video URLs based on the selected language
 
@@ -56,16 +54,23 @@ const Home = () => {
   const videoUrls = language === "english" ? englishVideos : frenchVideos;
   console.log("Video URLs:", videoUrls);
 
-
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      if(signUpData.password !== signUpData.confirmPassword) {
+      if(!/\S+@\S+\.\S+/.test(signUpData.email)){
+        alert("Invalid email address")
+        return;
+      }
+      if(signUpData.password.length < 8){
+        alert("Password must be at least 8 characters long")
+        return;
+      }
+      if (signUpData.password !== signUpData.confirmPassword) {
         alert("Passwords do not match");
         return;
       }
-      const { name, email, password,date } = signUpData;
-      if(!name || !email || !password || !date) {
+      const { name, email, password, date, sport } = signUpData;
+    if (!name || !email || !password || !date || !sport) {
         alert("Please fill out all fields");
         return;
       }
@@ -73,11 +78,13 @@ const Home = () => {
         name,
         email,
         password,
+        birthDate: date,
+        sport,
       });
-      if(response.status === 201) {
+      if (response.status === 201) {
         alert("Sign up successful");
         window.location.reload();
-      }else {
+      } else {
         alert("Error signing up. Please try again.");
       }
       console.log(response.data);
@@ -90,13 +97,20 @@ const Home = () => {
     e.preventDefault();
     try {
       const { email, password } = signInData;
-      if(!email || !password) {
+      if(!/\S+@\S+\.\S+/.test(email)){
+        alert("Invalid email address")
+        return;
+      }
+      if (!email || !password) {
         alert("Please fill out all fields");
         return;
       }
-      const response = await axios.post(`${API}/auth/signin`, { email, password });
+      const response = await axios.post(`${API}/auth/signin`, {
+        email,
+        password,
+      });
       console.log(response);
-      if(response.status === 200) {
+      if (response.status === 200) {
         localStorage.setItem("user", JSON.stringify(response.data));
         window.location.reload();
         // navigate("/education")
@@ -104,24 +118,26 @@ const Home = () => {
         alert("Invalid credentials");
       }
     } catch (error) {
+      alert("Invalid credentials");
       console.error(error);
     }
   };
 
   const handleSignInChange = (e) => {
-    setSignInData({
-      ...signInData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setSignInData((prevSignInData) => ({
+      ...prevSignInData,
+      [name]: value,
+    }));
   };
 
   const handleSignUpChange = (e) => {
-    setSignUpData({
-      ...signUpData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setSignUpData((prevSignUpData) => ({
+      ...prevSignUpData,
+      [name]: value,
+    }));
   };
-
 
   return (
     <div className="home-page">
@@ -144,93 +160,107 @@ const Home = () => {
 
             </Authenticator> */}
       {/* <Authenticator className='home-page-authenticator'/>     */}
-     
-     {!user && <div className="auth-container">
-        <div className="toggle">
-          <button
-            className={isSignIn ? "active" : ""}
-            onClick={() => setIsSignIn(true)}
-          >
-            Sign In
-          </button>
-          <button
-            className={!isSignIn ? "active" : ""}
-            onClick={() => {
-              setIsSignIn(false);
-            }}
-          >
-            Create Account
-          </button>
-        </div>
-        {isSignIn ? (
-          <form className="form">
-            <h2>Sign In</h2>
-            <input
-              type="email"
-              placeholder="Email"
-              name="email"
-              required
-              value={signInData.email}
-              onChange={handleSignInChange}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              required
-              value={signInData.password}
-              onChange={handleSignInChange}
-            />
-            <button type="submit" onClick={handleSignIn}>Sign In</button>
-          </form>
-        ) : (
-          <form className="form">
-            <h2>Create Account</h2>
-            <input
-              type="email"
-              placeholder="Email"
-              name="email"
-              required
-              value={signUpData.email}
-              onChange={handleSignUpChange}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              required
-              value={signUpData.password}
-              onChange={handleSignUpChange}
-            />
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              name="confirmPassword"
-              required
-              value={signUpData.confirmPassword}
-              onChange={handleSignUpChange}
-            />
-            <input
-              type="name"
-              placeholder="Given Name"
-              name="name"
-              required
-              value={signUpData.name}
-              onChange={handleSignUpChange}
-            />
-            <input
-              type="date"
-              placeholder="Birthdate"
-              name="date"
-              required
-              value={signUpData.date}
-              onChange={handleSignUpChange}
-            />
 
-            <button type="submit" onClick={handleSignUp}>Create Account</button>
-          </form>
-        )}
-      </div>}
+      {!user && (
+        <div className="auth-container">
+          <div className="toggle">
+            <button
+              className={isSignIn ? "active" : ""}
+              onClick={() => setIsSignIn(true)}
+            >
+              Sign In
+            </button>
+            <button
+              className={!isSignIn ? "active" : ""}
+              onClick={() => {
+                setIsSignIn(false);
+              }}
+            >
+              Create Account
+            </button>
+          </div>
+          {isSignIn ? (
+            <form className="form">
+              <h2>Sign In</h2>
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                required
+                value={signInData.email}
+                onChange={handleSignInChange}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                required
+                value={signInData.password}
+                onChange={handleSignInChange}
+              />
+              <button type="submit" onClick={handleSignIn}>
+                Sign In
+              </button>
+            </form>
+          ) : (
+            <form className="form">
+              <h2>Create Account</h2>
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                required
+                value={signUpData.email}
+                onChange={handleSignUpChange}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                required
+                value={signUpData.password}
+                onChange={handleSignUpChange}
+              />
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                required
+                value={signUpData.confirmPassword}
+                onChange={handleSignUpChange}
+              />
+              <input
+                type="name"
+                placeholder="Given Name"
+                name="name"
+                required
+                value={signUpData.name}
+                onChange={handleSignUpChange}
+              />
+              <input
+                type="date"
+                placeholder="Birthdate"
+                name="date"
+                required
+                value={signUpData.date}
+                onChange={handleSignUpChange}
+              />
+              <input
+                type="sport"
+                placeholder="Sport"
+                name="sport"
+                required
+                value={signUpData.sport}
+                onChange={handleSignUpChange}
+              />
+
+              <button type="submit" onClick={handleSignUp}>
+                Create Account
+              </button>
+            </form>
+          )}
+        </div>
+      )}
 
       {/* <div className='lang-button-div'>
                 <button className='mobile-btn-lang' onClick={toggleLanguage}>{language === 'english' ? 'Passer au Français' : 'Switch to English'}</button>
