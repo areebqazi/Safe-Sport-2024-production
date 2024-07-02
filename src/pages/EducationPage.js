@@ -15,9 +15,9 @@ const EducationPage = () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const [showCongratulationsPopup, setShowCongratulationsPopup] =
-  useState(false);
-  const [videosData , setVideoData] = useState([]);
-  // fetch videos 
+    useState(false);
+  const [videosData, setVideoData] = useState([]);
+  // fetch videos
   useEffect(() => {
     const fetchVideos = async () => {
       try {
@@ -29,18 +29,19 @@ const EducationPage = () => {
     };
     fetchVideos();
   }, []);
-  const [videoStatus, setVideoStatus] = useState(user?.videoStatus || [
-    { unlocked: true, watched: false },
-    { unlocked: false, watched: false },
-    { unlocked: false, watched: false },
-    { unlocked: false, watched: false },
-    { unlocked: false, watched: false },
-    { unlocked: false, watched: false },
-    { unlocked: false, watched: false },
-    { unlocked: false, watched: false },
-]);
+  const [videoStatus, setVideoStatus] = useState(
+    user?.user?.videoStatus || [
+      { unlocked: true, watched: false },
+      { unlocked: false, watched: false },
+      { unlocked: false, watched: false },
+      { unlocked: false, watched: false },
+      { unlocked: false, watched: false },
+      { unlocked: false, watched: false },
+      { unlocked: false, watched: false },
+      { unlocked: false, watched: false },
+    ]
+  );
 
-  const [sport, setSport] = useState(null);
   const [isSignIn, setIsSignIn] = useState(true);
 
   const [signInData, setSignInData] = useState({
@@ -56,11 +57,7 @@ const EducationPage = () => {
     sport: "",
   });
 
-  const handleSportChange = (event) => {
-    setSport(event.target.value);
-    console.log("Sport:", sport);
-  };
-  
+
   useEffect(() => {
     // Update localStorage whenever videoStatus changes
     localStorage.setItem("videoStatus", JSON.stringify(videoStatus));
@@ -95,12 +92,12 @@ const EducationPage = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      if(!/\S+@\S+\.\S+/.test(signUpData.email)){
-        alert("Invalid email address")
+      if (!/\S+@\S+\.\S+/.test(signUpData.email)) {
+        alert("Invalid email address");
         return;
       }
-      if(signUpData.password.length < 8){
-        alert("Password must be at least 8 characters long")
+      if (signUpData.password.length < 8) {
+        alert("Password must be at least 8 characters long");
         return;
       }
       if (signUpData.password !== signUpData.confirmPassword) {
@@ -108,7 +105,7 @@ const EducationPage = () => {
         return;
       }
       const { name, email, password, date, sport } = signUpData;
-    if (!name || !email || !password || !date || !sport) {
+      if (!name || !email || !password || !date || !sport) {
         alert("Please fill out all fields");
         return;
       }
@@ -135,8 +132,8 @@ const EducationPage = () => {
     e.preventDefault();
     try {
       const { email, password } = signInData;
-      if(!/\S+@\S+\.\S+/.test(email)){
-        alert("Invalid email address")
+      if (!/\S+@\S+\.\S+/.test(email)) {
+        alert("Invalid email address");
         return;
       }
       if (!email || !password) {
@@ -161,7 +158,7 @@ const EducationPage = () => {
     }
   };
 
- const handleSignInChange = (e) => {
+  const handleSignInChange = (e) => {
     const { name, value } = e.target;
     setSignInData((prevSignInData) => ({
       ...prevSignInData,
@@ -366,90 +363,92 @@ const EducationPage = () => {
           </div>
         )}
         {user && (
-            <div className="video-container">
-              {videosData.map((video, index) => (
-                <div key={index}>
-                  <div className={`video-wrapper ${videoStatus[index].unlocked ? "" : "locked"}`}>
-                    <video
-                      key={language} // Add key prop here to force re-render
-                      poster={language === "english" ? video.posterEng : video.posterFre} // Add poster images
-                      id="education-Video"
-                      controls
-                      controlsList="nodownload"
-                      onEnded={() => handleVideoEnded(index)}
-                      className={videoStatus[index].unlocked ? "" : "locked"}
-                    >
-                      <source
-                        src={language === "english" ? video.urlEng : video.urlFre}
-                        type="video/mp4"
-                      />
-                    </video>
-                    {videoStatus[index].unlocked ? null : (
-                      <div className="lock-overlay"></div>
-                    )}
-                  </div>
-                  <div className="titles-container">
-                    <h3 className="video-title">
-                      {language === "english" ? video.titleEng : video.titleFre}
-                    </h3>
-                    <p className="video-info">
-                      {language === "english" ? video.descriptionEng : video.descriptionFre}
-                    </p>
-                  </div>
-                </div>
-              ))}
-          
-          
-              {/* This is the pop-up where the user enters the info for the certificate */}
-              {showCongratulationsPopup && (
-                <div className="congratulations-popup congrats-div">
-                  <h2>
-                    {language === "english" ? "Congratulations!" : "Toutes nos félicitations!"}
-                  </h2>
-                  <br></br>
-                  <p>
-                    {language === "english"
-                      ? "You've finished watching all the video modules. Please enter the sport you are associated with and want to appear on your Certificate."
-                      : "Vous avez fini de regarder tous les modules vidéo. Veuillez entrer le sport auquel vous êtes associé et que vous souhaitez apparaître sur votre certificat."}
-                  </p>
-          
-                  <input
-                    type="text"
-                    className="sport-input"
-                    id="sport"
-                    maxLength={20}
-                    placeholder="Enter your sport"
-                    value={sport} // Access current sport value
-                    onChange={handleSportChange} // Update sport on change
-                  />
-          
-                  <button onClick={() => setShowCongratulationsPopup(false)}>Close</button>
-                  <div ref={divRef} className="certificate-wrapper">
-                    <p className="certificate-wrapper-Date">
-                      {new Date().toLocaleDateString("en-US")}
-                    </p>
-                    <p className="certificate-wrapper-Name">
-                      {user.name}
-                    </p>
-                    <p className="certificate-wrapper-Sport">{sport}</p>
-                    <img
-                      src={language === "english" ? EngCertificate : FreCertificate}
-                      alt="Certification"
-                      className="certificate"
-                    />
-                  </div>
-                  <br></br>
-          
-                  <button
-                    className="dwn-btn"
-                    onClick={handleDownloadImage}
-                    disabled={!sport}
+          <div className="video-container">
+            {videosData.map((video, index) => (
+              <div key={index}>
+                <div
+                  className={`video-wrapper ${
+                    videoStatus[index].unlocked ? "" : "locked"
+                  }`}
+                >
+                  <video
+                    key={language} // Add key prop here to force re-render
+                    poster={
+                      language === "english" ? video.posterEng : video.posterFre
+                    } // Add poster images
+                    id="education-Video"
+                    controls
+                    controlsList="nodownload"
+                    onEnded={() => handleVideoEnded(index)}
+                    className={videoStatus[index].unlocked ? "" : "locked"}
                   >
-                    {language === "english" ? "Download Certificate" : "Télécharger le certificat"}
-                  </button>
+                    <source
+                      src={language === "english" ? video.urlEng : video.urlFre}
+                      type="video/mp4"
+                    />
+                  </video>
+                  {videoStatus[index].unlocked ? null : (
+                    <div className="lock-overlay"></div>
+                  )}
                 </div>
-              )}
-            </div>
+                <div className="titles-container">
+                  <h3 className="video-title">
+                    {language === "english" ? video.titleEng : video.titleFre}
+                  </h3>
+                  <p className="video-info">
+                    {language === "english"
+                      ? video.descriptionEng
+                      : video.descriptionFre}
+                  </p>
+                </div>
+              </div>
+            ))}
+
+            {/* This is the pop-up where the user enters the info for the certificate */}
+            {showCongratulationsPopup && (
+              <div className="congratulations-popup congrats-div">
+                <h2>
+                  {language === "english"
+                    ? "Congratulations!"
+                    : "Toutes nos félicitations!"}
+                </h2>
+                <br></br>
+                <p>
+                  {language === "english"
+                    ? "You've finished watching all the video modules. Please download your Certificate."
+                    : "Vous avez fini de regarder tous les modules vidéo. Veuillez télécharger votre certificat."}
+                </p>
+
+                <button onClick={() => setShowCongratulationsPopup(false)}>
+                  Close
+                </button>
+                <div ref={divRef} className="certificate-wrapper">
+                  <p className="certificate-wrapper-Date">
+                    {new Date().toLocaleDateString("en-US")}
+                  </p>
+                  <p className="certificate-wrapper-Name">{user?.user?.name}</p>
+                  <p className="certificate-wrapper-Sport">{user?.user?.sport}</p>
+                  <img
+                    src={
+                      language === "english" ? EngCertificate : FreCertificate
+                    }
+                    alt="Certification"
+                    className="certificate"
+                  />
+                </div>
+                <br></br>
+
+                <button
+                  className="dwn-btn"
+                  onClick={handleDownloadImage}
+                >
+                  {language === "english"
+                    ? "Download Certificate"
+                    : "Télécharger le certificat"}
+                </button>
+              </div>
+            )}
+          </div>
         )}
       </div>
     </InView>

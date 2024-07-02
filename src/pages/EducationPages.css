@@ -193,6 +193,7 @@
 
 .congrats-div input {
   font-family: 'Avenir Light', sans-serif;
+  width: 100%;
   margin-bottom: 20px;
   margin-left: 5px;
   margin-right: 5px;
@@ -201,6 +202,7 @@
 .certificate-wrapper {
   position: relative;
   align-items: center !important;
+  margin-top: 20px;
 }
 
 
