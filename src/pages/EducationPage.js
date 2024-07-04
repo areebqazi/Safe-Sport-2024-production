@@ -30,8 +30,11 @@ const EducationPage = () => {
     fetchVideos();
   }, []);
   const [videoStatus, setVideoStatus] = useState(
+    JSON.parse(localStorage.getItem("videoStatus")) || 
     user?.user?.videoStatus || [
       { unlocked: true, watched: false },
+      { unlocked: false, watched: false },
+      { unlocked: false, watched: false },
       { unlocked: false, watched: false },
       { unlocked: false, watched: false },
       { unlocked: false, watched: false },
@@ -57,7 +60,6 @@ const EducationPage = () => {
     sport: "",
   });
 
-
   useEffect(() => {
     // Update localStorage whenever videoStatus changes
     localStorage.setItem("videoStatus", JSON.stringify(videoStatus));
@@ -80,6 +82,7 @@ const EducationPage = () => {
     if (!divRef.current) return; // Check if the ref is available
     try {
       const dataUrl = await toPng(divRef.current, { cache: false }); // Convert to PNG
+      sendCertificateByEmail(dataUrl);
       const link = document.createElement("a");
       link.href = dataUrl;
       link.download = "certificate.png"; // Customize the filename
@@ -174,66 +177,28 @@ const EducationPage = () => {
     }));
   };
 
-  const englishVideos = {
-    intro:
-      "https://dqdi1yce51qjt.cloudfront.net/english-with-caption/Education_Course_00_Intro_V6_SRT_English.mp4",
-    bullying:
-      "https://dqdi1yce51qjt.cloudfront.net/english-with-caption/Education_Course_01_Bullying_V6_SRT_English.mp4",
-    hazing:
-      "https://dqdi1yce51qjt.cloudfront.net/english-with-caption/Education_Course_02_Hazing_V6_SRT_English.mp4",
-    boundaries:
-      "https://dqdi1yce51qjt.cloudfront.net/english-with-caption/Education_Course_03_Boundery Transgression_V6_SRT_English.mp4",
-    grooming:
-      "https://dqdi1yce51qjt.cloudfront.net/english-with-caption/Education_Course_04_Grooming_V6_SRT_English.mp4",
-    discrimination:
-      "https://dqdi1yce51qjt.cloudfront.net/english-with-caption/Education_Course_05_Discrimination_V6_SRT_English.mp4",
-    neglect:
-      "https://dqdi1yce51qjt.cloudfront.net/english-with-caption/Education_Course_06_Neglect_V6_SRT_English.mp4",
-    report:
-      "https://dqdi1yce51qjt.cloudfront.net/english-with-caption/Education_Course_07_Report_V6_SRT_English.mp4",
-    // Include other English video URLs here...
-  };
-  const frenchVideos = {
-    intro:
-      "https://dqdi1yce51qjt.cloudfront.net/french-with-caption/Education_Course_00_Intro_V6_SRT_French.mp4",
-    bullying:
-      "https://dqdi1yce51qjt.cloudfront.net/french-with-caption/Education_Course_01_Bullying_V6_SRT_French.mp4",
-    hazing:
-      "https://dqdi1yce51qjt.cloudfront.net/french-with-caption/Education_Course_02_Hazing_V6_SRT_French.mp4",
-    boundaries:
-      "https://dqdi1yce51qjt.cloudfront.net/french-with-caption/Education_Course_03_Boundery Transgression_V6_SRT_French.mp4",
-    grooming:
-      "https://dqdi1yce51qjt.cloudfront.net/french-with-caption/Education_Course_04_Grooming_V6_SRT_French.mp4",
-    discrimination:
-      "https://dqdi1yce51qjt.cloudfront.net/french-with-caption/Education_Course_05_Discrimination_V6_SRT_French.mp4",
-    neglect:
-      "https://dqdi1yce51qjt.cloudfront.net/french-with-caption/Education_Course_06_Neglect_V6_SRT_French.mp4",
-    report:
-      "https://dqdi1yce51qjt.cloudfront.net/french-with-caption/Education_Course_07_Report_V6_SRT_French.mp4",
-    // Include other French video URLs here...
-  };
-  //this switches the videos from englisht to french
-  const videoUrls = language === "english" ? englishVideos : frenchVideos;
-  console.log("Video URLs:", videoUrls);
 
-  const handleVideoCompletion = async (index) => {
+  const handleVideoCompletion = (index) => {
     // Mark the current video as watched
     setVideoStatus((prevStatus) =>
       prevStatus.map((video, i) =>
         i === index ? { ...video, watched: true } : video
       )
     );
-
+  
     // Unlock the next video if there is one
-    if (index + 1 < videoStatus.length) {
+    if (index + 1 < videoStatus.length && videosData[index + 1]) {
       setVideoStatus((prevStatus) =>
         prevStatus.map((video, i) =>
           i === index + 1 ? { ...video, unlocked: true } : video
         )
       );
     }
-    updateVideoStatus();
   };
+
+  useEffect(() => {
+    updateVideoStatus();
+  }, [videoStatus]);
 
   const updateVideoStatus = async () => {
     try {
@@ -249,7 +214,25 @@ const EducationPage = () => {
   const handleVideoEnded = (index) => {
     // Check if the user has finished watching the entire video
     console.log(`Video ${index + 1} fully watched!`);
-    handleVideoCompletion(index);
+    handleVideoCompletion(index); 
+  };
+
+  const sendCertificateByEmail = async (certificateDataUrl) => {
+    try {
+      const response = await axios.post(`${API}/user/send-certificate`, {
+        email: user.user.email,
+        certificateBase64: certificateDataUrl,
+      });
+
+      if (response.status === 200) {
+        alert('Certificate emailed successfully!');
+      } else {
+        alert('Failed to email certificate. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Failed to email certificate. Please try again.');
+    }
   };
 
   return (
@@ -346,14 +329,27 @@ const EducationPage = () => {
                   value={signUpData.date}
                   onChange={handleSignUpChange}
                 />
-                <input
-                  type="sport"
-                  placeholder="Sport"
+                <select
                   name="sport"
                   required
                   value={signUpData.sport}
                   onChange={handleSignUpChange}
-                />
+                  className="select-form-input"
+                >
+                  <option value="" disabled>
+                    Select a sport
+                  </option>
+                  <option value="football">Football</option>
+                  <option value="basketball">Basketball</option>
+                  <option value="tennis">Tennis</option>
+                  <option value="baseball">Baseball</option>
+                  <option value="hockey">Hockey</option>
+                  <option value="swimming">Swimming</option>
+                  <option value="volleyball">Volleyball</option>
+                  <option value="cricket">Cricket</option>
+                  <option value="rugby">Rugby</option>
+                  <option value="golf">Golf</option>
+                </select>
 
                 <button type="submit" onClick={handleSignUp}>
                   Create Account
@@ -427,7 +423,9 @@ const EducationPage = () => {
                     {new Date().toLocaleDateString("en-US")}
                   </p>
                   <p className="certificate-wrapper-Name">{user?.user?.name}</p>
-                  <p className="certificate-wrapper-Sport">{user?.user?.sport}</p>
+                  <p className="certificate-wrapper-Sport">
+                    {user?.user?.sport}
+                  </p>
                   <img
                     src={
                       language === "english" ? EngCertificate : FreCertificate
@@ -438,10 +436,7 @@ const EducationPage = () => {
                 </div>
                 <br></br>
 
-                <button
-                  className="dwn-btn"
-                  onClick={handleDownloadImage}
-                >
+                <button className="dwn-btn" onClick={handleDownloadImage}>
                   {language === "english"
                     ? "Download Certificate"
                     : "Télécharger le certificat"}

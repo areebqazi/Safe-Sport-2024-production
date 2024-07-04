@@ -245,14 +245,27 @@ const Home = () => {
                 value={signUpData.date}
                 onChange={handleSignUpChange}
               />
-              <input
-                type="sport"
-                placeholder="Sport"
-                name="sport"
-                required
-                value={signUpData.sport}
-                onChange={handleSignUpChange}
-              />
+              <select
+                  name="sport"
+                  required
+                  value={signUpData.sport}
+                  onChange={handleSignUpChange}
+                  className="select-form-input"
+                >
+                  <option value="" disabled>
+                    Select a sport
+                  </option>
+                  <option value="football">Football</option>
+                  <option value="basketball">Basketball</option>
+                  <option value="tennis">Tennis</option>
+                  <option value="baseball">Baseball</option>
+                  <option value="hockey">Hockey</option>
+                  <option value="swimming">Swimming</option>
+                  <option value="volleyball">Volleyball</option>
+                  <option value="cricket">Cricket</option>
+                  <option value="rugby">Rugby</option>
+                  <option value="golf">Golf</option>
+                </select>
 
               <button type="submit" onClick={handleSignUp}>
                 Create Account
