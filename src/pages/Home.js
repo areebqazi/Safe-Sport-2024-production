@@ -31,6 +31,15 @@ const Home = () => {
     sport: "",
   });
 
+  const [showForgotPassword ,setShowForgotPassword] = useState(false);
+  
+   const [showChangePassword ,setShowChangePassword] = useState(false);
+
+   const [message, setMessage]= useState(false);
+
+   const [otp,setOtp] = useState('');  
+
+
   //language handler
   const { language } = useContext(LanguageContext);
 
@@ -139,6 +148,48 @@ const Home = () => {
     }));
   };
 
+  const handleChagePassword = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${API}/auth/reset-password`, {
+        email: signInData.email,
+        otp: otp,
+        newPassword: signUpData.password,
+      });
+      console.log(otp,'otp is')
+      if (response.status === 200) {
+        alert("Password reset successful");
+        setShowChangePassword(false);
+        setShowForgotPassword(false);
+      } else {
+        alert("Error resetting password. Please try again.");
+      }
+    }
+
+    catch (error) {
+      console.error(error);
+      alert("Error resetting password. Please try again.");
+    }
+  }
+
+  const handleSendOTP = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${API}/auth/sendOTP`, {
+        email: signInData.email,
+      });
+      console.log(response);  
+      if (response.status === 200) {
+        setMessage(response.data.message)
+      } else {
+        setMessage(response.data.message)
+      }
+    } catch (error) {
+      console.error(error);
+      setMessage(error.response.data.message);
+    }
+  };
+
   return (
     <div className="home-page">
       <div className="page-title-div">
@@ -161,7 +212,7 @@ const Home = () => {
             </Authenticator> */}
       {/* <Authenticator className='home-page-authenticator'/>     */}
 
-      {!user && (
+      {!user&&!showForgotPassword&&!showChangePassword && (
         <div className="auth-container">
           <div className="toggle">
             <button
@@ -200,6 +251,9 @@ const Home = () => {
               />
               <button type="submit" onClick={handleSignIn}>
                 Sign In
+              </button>
+              <button className="forgot-password" onClick={()=>setShowForgotPassword(true)}>
+                Forgot Password
               </button>
             </form>
           ) : (
@@ -272,6 +326,61 @@ const Home = () => {
               </button>
             </form>
           )}
+        </div>
+      )}
+      {showForgotPassword && (
+        <div className="auth-container">
+          <form className="form">
+            <h2>Enter your Email</h2>
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              required
+              value={signInData.email}
+              onChange={handleSignInChange}
+            />
+            <button type="submit" className="mb-3" onClick={handleSendOTP}>
+              Send Code
+            </button>
+
+            {message && <p>{message}</p>}
+            <input
+              type="text"
+              placeholder="Enter OTP"
+              required
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
+            />
+            <button type="submit" className="forgot-password" onClick={()=>{setShowChangePassword(true); setShowForgotPassword(false)}}>Submit</button>
+            <button className="forgot-password" onClick={()=>{setShowChangePassword(false);setShowForgotPassword(false)}}>Cancel</button>
+          </form>
+        </div>
+      )}
+
+      {showChangePassword && (
+        <div className="auth-container">
+          <form className="form">
+            <h2>Change Password</h2>
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              required
+              value={signUpData.password}
+              onChange={handleSignUpChange}
+            />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              name="confirmPassword"
+              required
+              value={signUpData.confirmPassword}
+              onChange={handleSignUpChange}
+            />
+            <button type="submit" onClick={handleChagePassword}>Change Password</button>
+            <button onClick={()=>{setShowChangePassword(false);setShowForgotPassword(false)}} className="forgot-password">Cancel</button>
+          </form>
         </div>
       )}
 
