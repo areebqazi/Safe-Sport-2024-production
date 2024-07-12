@@ -189,6 +189,10 @@ footer {
   cursor: pointer !important;
 }
 
+
+
+
+
 .lang-button-div {
   position: absolute;
   /* background-color: #FF3131 !important; */
@@ -276,7 +280,7 @@ footer {
 
   .lang-button-div {
     position: absolute;
-    background-color: #FF3131 !important;
+    /* background-color: #FF3131 !important; */
     color: whitesmoke;
     border: none;
     margin-top: 20px;
@@ -306,9 +310,18 @@ footer {
     min-width: 160px;
   }
 
+  .mobile-btn-lang {
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
 }
 
 @media screen and (max-width: 425px) {
+  .mobile-btn-lang {
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
   h1 {
     font-size: 50px;
   }
@@ -351,7 +364,7 @@ footer {
 
   .lang-button-div {
     position: absolute;
-    background-color: #FF3131 !important;
+    /* background-color: #FF3131 !important; */
     color: whitesmoke;
     border: none;
     margin-top: 20px;

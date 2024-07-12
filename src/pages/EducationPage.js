@@ -374,6 +374,7 @@ const EducationPage = () => {
                     } // Add poster images
                     id="education-Video"
                     controls
+                    loading = "lazy"
                     controlsList="nodownload"
                     onEnded={() => handleVideoEnded(index)}
                     className={videoStatus[index].unlocked ? "" : "locked"}
@@ -424,7 +425,7 @@ const EducationPage = () => {
                   </p>
                   <p className="certificate-wrapper-Name">{user?.user?.name}</p>
                   <p className="certificate-wrapper-Sport">
-                    {user?.user?.sport}
+                    {user?.user?.sport.toUpperCase()}
                   </p>
                   <img
                     src={

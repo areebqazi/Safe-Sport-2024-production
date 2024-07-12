@@ -4,6 +4,8 @@ import React, { useContext, useRef, useState } from 'react';
 import { InView } from 'react-intersection-observer';
 
 //thumbnail imports
+
+
 import tnDamianEng from '../assets/thumbnails/tnDamianEng.png';
 import tnDamianFre from '../assets/thumbnails/tnDamianFre.png';
 import tnFinlayEng from '../assets/thumbnails/tnFinlayEng.png';
