@@ -9,6 +9,7 @@ import EngCertificate from "../assets/cert/SafeSportCompletionCertificate.png";
 import FreCertificate from "../assets/cert/SafeSportCompletionCertificateFrench.png";
 import { LanguageContext } from "../LanguageContext";
 import { API, videoData } from "../constants";
+import VideoModal from "./VideoModal";
 import axios from "axios";
 
 const EducationPage = () => {
@@ -30,19 +31,19 @@ const EducationPage = () => {
     fetchVideos();
   }, []);
   const [videoStatus, setVideoStatus] = useState(
-    JSON.parse(localStorage.getItem("videoStatus")) || 
-    user?.user?.videoStatus || [
-      { unlocked: true, watched: false },
-      { unlocked: false, watched: false },
-      { unlocked: false, watched: false },
-      { unlocked: false, watched: false },
-      { unlocked: false, watched: false },
-      { unlocked: false, watched: false },
-      { unlocked: false, watched: false },
-      { unlocked: false, watched: false },
-      { unlocked: false, watched: false },
-      { unlocked: false, watched: false },
-    ]
+    JSON.parse(localStorage.getItem("videoStatus")) ||
+      user?.user?.videoStatus || [
+        { unlocked: true, watched: false },
+        { unlocked: false, watched: false },
+        { unlocked: false, watched: false },
+        { unlocked: false, watched: false },
+        { unlocked: false, watched: false },
+        { unlocked: false, watched: false },
+        { unlocked: false, watched: false },
+        { unlocked: false, watched: false },
+        { unlocked: false, watched: false },
+        { unlocked: false, watched: false },
+      ]
   );
 
   const [isSignIn, setIsSignIn] = useState(true);
@@ -177,7 +178,6 @@ const EducationPage = () => {
     }));
   };
 
-
   const handleVideoCompletion = (index) => {
     // Mark the current video as watched
     setVideoStatus((prevStatus) =>
@@ -185,7 +185,7 @@ const EducationPage = () => {
         i === index ? { ...video, watched: true } : video
       )
     );
-  
+
     // Unlock the next video if there is one
     if (index + 1 < videoStatus.length && videosData[index + 1]) {
       setVideoStatus((prevStatus) =>
@@ -214,7 +214,7 @@ const EducationPage = () => {
   const handleVideoEnded = (index) => {
     // Check if the user has finished watching the entire video
     console.log(`Video ${index + 1} fully watched!`);
-    handleVideoCompletion(index); 
+    handleVideoCompletion(index);
   };
 
   const sendCertificateByEmail = async (certificateDataUrl) => {
@@ -225,14 +225,30 @@ const EducationPage = () => {
       });
 
       if (response.status === 200) {
-        alert('Certificate emailed successfully!');
+        alert("Certificate emailed successfully!");
       } else {
-        alert('Failed to email certificate. Please try again.');
+        alert("Failed to email certificate. Please try again.");
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('Failed to email certificate. Please try again.');
+      console.error("Error:", error);
+      alert("Failed to email certificate. Please try again.");
     }
+  };
+
+  const [showModal, setShowModal] = useState(false);
+  const [modalVideoSrc, setModalVideoSrc] = useState("");
+  const [modalVideoPoster, setModalVideoPoster] = useState("");
+
+  const handleVideoClick = (videoSrc, videoPoster) => {
+    setModalVideoSrc(videoSrc);
+    setModalVideoPoster(videoPoster);
+    setShowModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+    setModalVideoSrc("");
+    setModalVideoPoster("");
   };
 
   return (
@@ -367,23 +383,23 @@ const EducationPage = () => {
                     videoStatus[index].unlocked ? "" : "locked"
                   }`}
                 >
-                  <video
-                    key={language} // Add key prop here to force re-render
-                    poster={
+                  <img
+                    src={
                       language === "english" ? video.posterEng : video.posterFre
-                    } // Add poster images
-                    id="education-Video"
-                    controls
-                    loading = "lazy"
-                    controlsList="nodownload"
-                    onEnded={() => handleVideoEnded(index)}
-                    className={videoStatus[index].unlocked ? "" : "locked"}
-                  >
-                    <source
-                      src={language === "english" ? video.urlEng : video.urlFre}
-                      type="video/mp4"
-                    />
-                  </video>
+                    }
+                    alt="Video Thumbnail"
+                    className={`video-thumbnail ${
+                      videoStatus[index].unlocked ? "" : "locked"
+                    }`}
+                    onClick={() =>
+                      handleVideoClick(
+                        language === "english" ? video.urlEng : video.urlFre,
+                        language === "english"
+                          ? video.posterEng
+                          : video.posterFre
+                      )
+                    }
+                  />
                   {videoStatus[index].unlocked ? null : (
                     <div className="lock-overlay"></div>
                   )}
@@ -400,6 +416,14 @@ const EducationPage = () => {
                 </div>
               </div>
             ))}
+
+            <VideoModal
+              show={showModal}
+              onClose={handleModalClose}
+              videoSrc={modalVideoSrc}
+              videoPoster={modalVideoPoster}
+              onEnded={() => handleVideoEnded(modalVideoSrc)}
+            />
 
             {/* This is the pop-up where the user enters the info for the certificate */}
             {showCongratulationsPopup && (

@@ -170,6 +170,24 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   }
 
+  .video-thumbnail {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .video-thumbnail:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .video-thumbnail.locked {
+    filter: grayscale(100%);
+    cursor: not-allowed;
+  }
+
   .video-title {
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: #3b3b3b;
