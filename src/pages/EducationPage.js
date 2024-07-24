@@ -30,19 +30,19 @@ const EducationPage = () => {
     fetchVideos();
   }, []);
   const [videoStatus, setVideoStatus] = useState(
-    JSON.parse(localStorage.getItem("videoStatus")) || 
-    user?.user?.videoStatus || [
-      { unlocked: true, watched: false },
-      { unlocked: false, watched: false },
-      { unlocked: false, watched: false },
-      { unlocked: false, watched: false },
-      { unlocked: false, watched: false },
-      { unlocked: false, watched: false },
-      { unlocked: false, watched: false },
-      { unlocked: false, watched: false },
-      { unlocked: false, watched: false },
-      { unlocked: false, watched: false },
-    ]
+    JSON.parse(localStorage.getItem("videoStatus")) ||
+      user?.user?.videoStatus || [
+        { unlocked: true, watched: false },
+        { unlocked: false, watched: false },
+        { unlocked: false, watched: false },
+        { unlocked: false, watched: false },
+        { unlocked: false, watched: false },
+        { unlocked: false, watched: false },
+        { unlocked: false, watched: false },
+        { unlocked: false, watched: false },
+        { unlocked: false, watched: false },
+        { unlocked: false, watched: false },
+      ]
   );
 
   const [isSignIn, setIsSignIn] = useState(true);
@@ -62,7 +62,6 @@ const EducationPage = () => {
 
   useEffect(() => {
     // Update localStorage whenever videoStatus changes
-    localStorage.setItem("videoStatus", JSON.stringify(videoStatus));
     let allVideosWatched = videoStatus.every((video) => video.watched);
     allVideosWatched = videoStatus[videoData?.length - 1].watched;
     if (allVideosWatched) {
@@ -177,7 +176,6 @@ const EducationPage = () => {
     }));
   };
 
-
   const handleVideoCompletion = (index) => {
     // Mark the current video as watched
     setVideoStatus((prevStatus) =>
@@ -185,7 +183,7 @@ const EducationPage = () => {
         i === index ? { ...video, watched: true } : video
       )
     );
-  
+
     // Unlock the next video if there is one
     if (index + 1 < videoStatus.length && videosData[index + 1]) {
       setVideoStatus((prevStatus) =>
@@ -206,6 +204,7 @@ const EducationPage = () => {
         ...user,
         videoStatus: videoStatus,
       });
+      localStorage.setItem("videoStatus", JSON.stringify(videoStatus));
     } catch (error) {
       console.log(error);
     }
@@ -214,7 +213,7 @@ const EducationPage = () => {
   const handleVideoEnded = (index) => {
     // Check if the user has finished watching the entire video
     console.log(`Video ${index + 1} fully watched!`);
-    handleVideoCompletion(index); 
+    handleVideoCompletion(index);
   };
 
   const sendCertificateByEmail = async (certificateDataUrl) => {
@@ -225,13 +224,13 @@ const EducationPage = () => {
       });
 
       if (response.status === 200) {
-        alert('Certificate emailed successfully!');
+        alert("Certificate emailed successfully!");
       } else {
-        alert('Failed to email certificate. Please try again.');
+        alert("Failed to email certificate. Please try again.");
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('Failed to email certificate. Please try again.');
+      console.error("Error:", error);
+      alert("Failed to email certificate. Please try again.");
     }
   };
 
@@ -374,7 +373,7 @@ const EducationPage = () => {
                     } // Add poster images
                     id="education-Video"
                     controls
-                    loading = "lazy"
+                    loading="lazy"
                     controlsList="nodownload"
                     onEnded={() => handleVideoEnded(index)}
                     className={videoStatus[index].unlocked ? "" : "locked"}

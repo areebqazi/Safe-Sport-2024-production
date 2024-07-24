@@ -93,11 +93,10 @@
 
 
   .locked {
-
     filter: grayscale(90%);
     position: relative !important;
     pointer-events: none;
-    background-image: url('../assets/lock.png') !important;
+    /* background-image: url('../assets/lock.png') !important; */
     transition: filter 0.6s ease, background-size 0.6s ease;
     background-position: center;
     background-size: cover;
@@ -118,11 +117,24 @@
     background-size: 50%;
     background-repeat: no-repeat;
     opacity: .9;
-    /* Adjust the opacity as needed */
     pointer-events: none;
     z-index: 4;
     transition: filter 0.6s ease, background-size 0.6s ease;
-    /* Place the overlay above the video */
+  }
+
+  .lock-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 300px;
+    background: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    transition: background-color 0.6s ease;
   }
 
 
@@ -135,22 +147,7 @@
     /* Ensure relative positioning for overlay within each video */
   }
 
-  .lock-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    width: 300px;
-    /* height: auto; */
-    background: rgba(0, 0, 0, 0);
-    /* Semi-transparent black background */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 12px;
-    transition: background-color 0.6s ease;
-  }
+  
 
   .titles-container {
     background-color: #ffffff;

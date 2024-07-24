@@ -32,7 +32,7 @@ function App() {
     try {
       const response = await axios.post(`${API}/auth/signout`);
       localStorage.removeItem("user");
-      localStorage.removeItem("videoStatus");
+      localStorage.removeItem("videoStatus"); 
       window.location.reload();
     } catch (error) {
       console.error(error);
