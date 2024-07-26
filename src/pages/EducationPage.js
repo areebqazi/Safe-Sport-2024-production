@@ -53,7 +53,8 @@ const EducationPage = () => {
   });
 
   const [signUpData, setSignUpData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     date: "",
@@ -222,7 +223,6 @@ const EducationPage = () => {
         email: user.user.email,
         certificateBase64: certificateDataUrl,
       });
-
       if (response.status === 200) {
         alert("Certificate emailed successfully!");
       } else {
@@ -313,11 +313,19 @@ const EducationPage = () => {
                   onChange={handleSignUpChange}
                 />
                 <input
-                  type="name"
-                  placeholder="Given Name"
-                  name="name"
+                  type="text"
+                  placeholder="First Name"
+                  name="firstName"
                   required
-                  value={signUpData.name}
+                  value={signUpData.firstName}
+                  onChange={handleSignUpChange}
+                />
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  name="lastName"
+                  required
+                  value={signUpData.lastName}
                   onChange={handleSignUpChange}
                 />
                 <input
@@ -338,16 +346,10 @@ const EducationPage = () => {
                   <option value="" disabled>
                     Select a sport
                   </option>
-                  <option value="football">Football</option>
-                  <option value="basketball">Basketball</option>
-                  <option value="tennis">Tennis</option>
-                  <option value="baseball">Baseball</option>
-                  <option value="hockey">Hockey</option>
+                  <option value="football">Atheltics</option>
                   <option value="swimming">Swimming</option>
                   <option value="volleyball">Volleyball</option>
-                  <option value="cricket">Cricket</option>
-                  <option value="rugby">Rugby</option>
-                  <option value="golf">Golf</option>
+                  <option valye="other">Other</option>
                 </select>
 
                 <button type="submit" onClick={handleSignUp}>
