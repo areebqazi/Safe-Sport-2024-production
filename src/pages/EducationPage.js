@@ -107,13 +107,14 @@ const EducationPage = () => {
         alert("Passwords do not match");
         return;
       }
-      const { name, email, password, date, sport } = signUpData;
-      if (!name || !email || !password || !date || !sport) {
+      const { firstName,lastName, email, password, date, sport } = signUpData;
+      if (!firstName ||!lastName|| !email || !password || !date || !sport) {
         alert("Please fill out all fields");
         return;
       }
       const response = await axios.post(`${API}/auth/signup`, {
-        name,
+        firstName,
+        lastName,
         email,
         password,
         birthDate: date,
@@ -127,6 +128,7 @@ const EducationPage = () => {
       }
       console.log(response.data);
     } catch (error) {
+      alert("Error signing up. Please try again.");
       console.error(error);
     }
   };
@@ -424,7 +426,7 @@ const EducationPage = () => {
                   <p className="certificate-wrapper-Date">
                     {new Date().toLocaleDateString("en-US")}
                   </p>
-                  <p className="certificate-wrapper-Name">{user?.user?.name}</p>
+                  <p className="certificate-wrapper-Name">{`${user?.user?.firstName} ${user?.user?.lastName}`}</p>
                   <p className="certificate-wrapper-Sport">
                     {user?.user?.sport.toUpperCase()}
                   </p>

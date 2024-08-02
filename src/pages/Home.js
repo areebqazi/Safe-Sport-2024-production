@@ -32,14 +32,13 @@ const Home = () => {
     sport: "",
   });
 
-  const [showForgotPassword ,setShowForgotPassword] = useState(false);
-  
-   const [showChangePassword ,setShowChangePassword] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
 
-   const [message, setMessage]= useState(false);
+  const [showChangePassword, setShowChangePassword] = useState(false);
 
-   const [otp,setOtp] = useState('');  
+  const [message, setMessage] = useState(false);
 
+  const [otp, setOtp] = useState("");
 
   //language handler
   const { language } = useContext(LanguageContext);
@@ -67,25 +66,26 @@ const Home = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      if(!/\S+@\S+\.\S+/.test(signUpData.email)){
-        alert("Invalid email address")
+      if (!/\S+@\S+\.\S+/.test(signUpData.email)) {
+        alert("Invalid email address");
         return;
       }
-      if(signUpData.password.length < 8){
-        alert("Password must be at least 8 characters long")
+      if (signUpData.password.length < 8) {
+        alert("Password must be at least 8 characters long");
         return;
       }
       if (signUpData.password !== signUpData.confirmPassword) {
         alert("Passwords do not match");
         return;
       }
-      const { name, email, password, date, sport } = signUpData;
-    if (!name || !email || !password || !date || !sport) {
+      const { firstName, lastName, email, password, date, sport } = signUpData;
+      if (!firstName || !lastName || !email || !password || !date || !sport) {
         alert("Please fill out all fields");
         return;
       }
       const response = await axios.post(`${API}/auth/signup`, {
-        name,
+        firstName,
+        lastName,
         email,
         password,
         birthDate: date,
@@ -99,6 +99,7 @@ const Home = () => {
       }
       console.log(response.data);
     } catch (error) {
+      alert("Error signing up. Please try again.");
       console.error(error);
     }
   };
@@ -107,8 +108,8 @@ const Home = () => {
     e.preventDefault();
     try {
       const { email, password } = signInData;
-      if(!/\S+@\S+\.\S+/.test(email)){
-        alert("Invalid email address")
+      if (!/\S+@\S+\.\S+/.test(email)) {
+        alert("Invalid email address");
         return;
       }
       if (!email || !password) {
@@ -157,7 +158,7 @@ const Home = () => {
         otp: otp,
         newPassword: signUpData.password,
       });
-      console.log(otp,'otp is')
+      console.log(otp, "otp is");
       if (response.status === 200) {
         alert("Password reset successful");
         setShowChangePassword(false);
@@ -165,13 +166,11 @@ const Home = () => {
       } else {
         alert("Error resetting password. Please try again.");
       }
-    }
-
-    catch (error) {
+    } catch (error) {
       console.error(error);
       alert("Error resetting password. Please try again.");
     }
-  }
+  };
 
   const handleSendOTP = async (e) => {
     e.preventDefault();
@@ -179,11 +178,11 @@ const Home = () => {
       const response = await axios.post(`${API}/auth/sendOTP`, {
         email: signInData.email,
       });
-      console.log(response);  
+      console.log(response);
       if (response.status === 200) {
-        setMessage(response.data.message)
+        setMessage(response.data.message);
       } else {
-        setMessage(response.data.message)
+        setMessage(response.data.message);
       }
     } catch (error) {
       console.error(error);
@@ -213,7 +212,7 @@ const Home = () => {
             </Authenticator> */}
       {/* <Authenticator className='home-page-authenticator'/>     */}
 
-      {!user&&!showForgotPassword&&!showChangePassword && (
+      {!user && !showForgotPassword && !showChangePassword && (
         <div className="auth-container">
           <div className="toggle">
             <button
@@ -253,7 +252,10 @@ const Home = () => {
               <button type="submit" onClick={handleSignIn}>
                 Sign In
               </button>
-              <button className="forgot-password" onClick={()=>setShowForgotPassword(true)}>
+              <button
+                className="forgot-password"
+                onClick={() => setShowForgotPassword(true)}
+              >
                 Forgot Password
               </button>
             </form>
@@ -284,7 +286,7 @@ const Home = () => {
                 value={signUpData.confirmPassword}
                 onChange={handleSignUpChange}
               />
-              <input 
+              <input
                 type="text"
                 placeholder="First Name"
                 name="firstName"
@@ -309,20 +311,20 @@ const Home = () => {
                 onChange={handleSignUpChange}
               />
               <select
-                  name="sport"
-                  required
-                  value={signUpData.sport}
-                  onChange={handleSignUpChange}
-                  className="select-form-input"
-                >
-                  <option value="" disabled>
-                    Select a sport
-                  </option>
-                  <option value="football">Atheltics</option>
-                  <option value="swimming">Swimming</option>
-                  <option value="volleyball">Volleyball</option>
-                  <option valye="other">Other</option>
-                </select>
+                name="sport"
+                required
+                value={signUpData.sport}
+                onChange={handleSignUpChange}
+                className="select-form-input"
+              >
+                <option value="" disabled>
+                  Select a sport
+                </option>
+                <option value="football">Atheltics</option>
+                <option value="swimming">Swimming</option>
+                <option value="volleyball">Volleyball</option>
+                <option valye="other">Other</option>
+              </select>
 
               <button type="submit" onClick={handleSignUp}>
                 Create Account
@@ -355,8 +357,25 @@ const Home = () => {
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
             />
-            <button type="submit" className="forgot-password" onClick={()=>{setShowChangePassword(true); setShowForgotPassword(false)}}>Submit</button>
-            <button className="forgot-password" onClick={()=>{setShowChangePassword(false);setShowForgotPassword(false)}}>Cancel</button>
+            <button
+              type="submit"
+              className="forgot-password"
+              onClick={() => {
+                setShowChangePassword(true);
+                setShowForgotPassword(false);
+              }}
+            >
+              Submit
+            </button>
+            <button
+              className="forgot-password"
+              onClick={() => {
+                setShowChangePassword(false);
+                setShowForgotPassword(false);
+              }}
+            >
+              Cancel
+            </button>
           </form>
         </div>
       )}
@@ -381,8 +400,18 @@ const Home = () => {
               value={signUpData.confirmPassword}
               onChange={handleSignUpChange}
             />
-            <button type="submit" onClick={handleChagePassword}>Change Password</button>
-            <button onClick={()=>{setShowChangePassword(false);setShowForgotPassword(false)}} className="forgot-password">Cancel</button>
+            <button type="submit" onClick={handleChagePassword}>
+              Change Password
+            </button>
+            <button
+              onClick={() => {
+                setShowChangePassword(false);
+                setShowForgotPassword(false);
+              }}
+              className="forgot-password"
+            >
+              Cancel
+            </button>
           </form>
         </div>
       )}
