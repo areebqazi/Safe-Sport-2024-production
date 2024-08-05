@@ -348,7 +348,7 @@ const EducationPage = () => {
                   <option value="" disabled>
                     Select a sport
                   </option>
-                  <option value="football">Atheltics</option>
+                  <option value="football">Athletics</option>
                   <option value="swimming">Swimming</option>
                   <option value="volleyball">Volleyball</option>
                   <option valye="other">Other</option>
