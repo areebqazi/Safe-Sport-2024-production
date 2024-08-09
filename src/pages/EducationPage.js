@@ -117,7 +117,7 @@ const EducationPage = () => {
         lastName,
         email,
         password,
-        birthDate: date,
+        birthdate: date,
         sport,
       });
       if (response.status === 201) {
