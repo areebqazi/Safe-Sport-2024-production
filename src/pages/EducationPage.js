@@ -330,6 +330,9 @@ const EducationPage = () => {
                   value={signUpData.lastName}
                   onChange={handleSignUpChange}
                 />
+                <div className="birthdate">
+                <label htmlFor="date">Date of Birth</label>
+                </div>
                 <input
                   type="date"
                   placeholder="Birthdate"

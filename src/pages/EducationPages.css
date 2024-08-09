@@ -212,6 +212,10 @@
     transform: translateX(-50%); /* Center horizontally */
   }
 
+  .birthdate{
+    display: flex;
+    margin-bottom: 5px;
+  }
 
   .certificate-wrapper-Sport {
     position: absolute;

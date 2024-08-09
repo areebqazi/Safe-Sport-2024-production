@@ -56,6 +56,12 @@
       }
 
 
+      .birthdate{
+        display: flex;
+        margin-bottom: 5px;
+      }
+
+
 
 
     .education-page {
