@@ -206,6 +206,7 @@ const EducationPage = () => {
       const response = await axios.patch(`${API}/user/${user?.user?._id}`, {
         ...user,
         videoStatus: videoStatus,
+        courseCompletionDate: new Date(),
       });
       localStorage.setItem("videoStatus", JSON.stringify(videoStatus));
     } catch (error) {
