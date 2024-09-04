@@ -195,7 +195,7 @@ const Home = () => {
       <div className="page-title-div">
         <h1 className="page-title">
           {language === "english"
-            ? "Welcome to the Safe Sport Education for Youth Program"
+            ? "Welcome to Safe Sport Education for Youth Program"
             : "Bienvenue au programme d`éducation au sport sécuritaire pour les jeunes"}{" "}
         </h1>
         <br></br>
