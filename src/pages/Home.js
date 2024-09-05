@@ -219,7 +219,7 @@ const Home = () => {
               className={isSignIn ? "active" : ""}
               onClick={() => setIsSignIn(true)}
             >
-              Sign In
+              {language === "english" ? "Sign In" : "Se connecter"}
             </button>
             <button
               className={!isSignIn ? "active" : ""}
@@ -250,18 +250,18 @@ const Home = () => {
                 onChange={handleSignInChange}
               />
               <button type="submit" onClick={handleSignIn}>
-                Sign In
+                {language === "english" ? "Sign In" : "Se connecter"}
               </button>
               <button
                 className="forgot-password"
                 onClick={() => setShowForgotPassword(true)}
               >
-                Forgot Password
+                {language === "english" ? "Forgot Password" : "Mot de passe oublié"}
               </button>
             </form>
           ) : (
             <form className="form">
-              <h2>Create Account</h2>
+              <h2>{language === "english" ? "Create Account" : "Créer un compte"} </h2>
               <input
                 type="email"
                 placeholder={language === "english" ? "Email" : "Courriel"}
