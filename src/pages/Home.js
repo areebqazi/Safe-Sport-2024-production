@@ -219,7 +219,7 @@ const Home = () => {
               className={isSignIn ? "active" : ""}
               onClick={() => setIsSignIn(true)}
             >
-              Sign In
+              {language === "english" ? "Sign In" : "Se connecter"}
             </button>
             <button
               className={!isSignIn ? "active" : ""}
@@ -227,15 +227,15 @@ const Home = () => {
                 setIsSignIn(false);
               }}
             >
-              Create Account
+              {language === "english" ? "Create Account" : "Créer un compte"} 
             </button>
           </div>
           {isSignIn ? (
             <form className="form">
-              <h2>Sign In</h2>
+              <h2>{language === "english" ? "Sign In" : "Se connecter"}</h2>
               <input
                 type="email"
-                placeholder="Email"
+                placeholder={language === "english" ? "Email" : "Courriel"}
                 name="email"
                 required
                 value={signInData.email}
@@ -243,28 +243,28 @@ const Home = () => {
               />
               <input
                 type="password"
-                placeholder="Password"
+                placeholder={language === "english" ? "Password" : "Mot de passe"}
                 name="password"
                 required
                 value={signInData.password}
                 onChange={handleSignInChange}
               />
               <button type="submit" onClick={handleSignIn}>
-                Sign In
+                {language === "english" ? "Sign In" : "Se connecter"}
               </button>
               <button
                 className="forgot-password"
                 onClick={() => setShowForgotPassword(true)}
               >
-                Forgot Password
+                {language === "english" ? "Forgot Password" : "Mot de passe oublié"}
               </button>
             </form>
           ) : (
             <form className="form">
-              <h2>Create Account</h2>
+              <h2>{language === "english" ? "Create Account" : "Créer un compte"} </h2>
               <input
                 type="email"
-                placeholder="Email"
+                placeholder={language === "english" ? "Email" : "Courriel"}
                 name="email"
                 required
                 value={signUpData.email}
@@ -272,7 +272,7 @@ const Home = () => {
               />
               <input
                 type="password"
-                placeholder="Password"
+                placeholder={language === "english" ? "Password" : "Mot de passe"}
                 name="password"
                 required
                 value={signUpData.password}
@@ -280,7 +280,7 @@ const Home = () => {
               />
               <input
                 type="password"
-                placeholder="Confirm Password"
+                placeholder={language === "english" ? "Confirm Password" : "Confirmez le mot de passe"}
                 name="confirmPassword"
                 required
                 value={signUpData.confirmPassword}
@@ -288,7 +288,7 @@ const Home = () => {
               />
               <input
                 type="text"
-                placeholder="First Name"
+                placeholder={language === "english" ? "First Name" : "Prénom"}
                 name="firstName"
                 required
                 value={signUpData.firstName}
@@ -296,14 +296,16 @@ const Home = () => {
               />
               <input
                 type="text"
-                placeholder="Last Name"
+                placeholder={language === "english" ? "Last Name" : "Nom de famille"} 
                 name="lastName"
                 required
                 value={signUpData.lastName}
                 onChange={handleSignUpChange}
               />
               <div className="birthdate">
-                <label htmlFor="date">Date of Birth</label>
+                <label htmlFor="date">
+  {language === "english" ? "Date of Birth" : "Date de naissance"}
+</label>
                 </div>
               <input
                 type="date"
@@ -321,7 +323,7 @@ const Home = () => {
                 className="select-form-input"
               >
                 <option value="" disabled>
-                  Select a sport
+                  {language === "english" ? "Select a sport" : "Sélectionnez un sport"}
                 </option>
                 <option value="football">Athletics</option>
                 <option value="swimming">Swimming</option>
@@ -330,7 +332,7 @@ const Home = () => {
               </select>
 
               <button type="submit" onClick={handleSignUp}>
-                Create Account
+                {language === "english" ? "Create Account" : "Créer un compte"} 
               </button>
             </form>
           )}
@@ -339,10 +341,10 @@ const Home = () => {
       {showForgotPassword && (
         <div className="auth-container">
           <form className="form">
-            <h2>Enter your Email</h2>
+            <h2>{language === "english" ? "Enter your Email" : "Entrez votre e-mail"}</h2>
             <input
               type="email"
-              placeholder="Email"
+                placeholder={language === "english" ? "Email" : "E-mail"}
               name="email"
               required
               value={signInData.email}

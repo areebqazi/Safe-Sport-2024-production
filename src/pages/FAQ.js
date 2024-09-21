@@ -37,10 +37,10 @@ const FAQ = () => {
               {language === "english"
                 ? "There are two ways. After viewing all videos in order, athletes will receive a certificate of completion via the email address they used to register. If you would like further compliance tracking, you can "
                 : "Il y a deux façons. Après avoir visionné toutes les vidéos dans l'ordre, les athlètes recevront un certificat de réussite à l'adresse e-mail qu'ils ont utilisée pour s'inscrire. Si vous souhaitez un suivi de la conformité supplémentaire, vous pouvez "}
-              <a href="mailto:tony@verduredigital.com">Email us</a>
+              <a href="mailto:hello@safesportforyouth.org">Email us</a>
               {language === "english"
                 ? "."
-                : " à l'adresse tony@verduredigital.com."}
+                : " à l'adresse hello@safesportforyouth.org."}
             </p>{" "}
           </div>
         </div>
@@ -275,8 +275,11 @@ const FAQ = () => {
           <div class="answer">
             <p>
               {language === "english"
-                ? "At Safe Sport for Youth we are always happy to hear from our members. Your feedback allows us to modify and improve our educational programs so don't hold back on your comments. Please contact us at: (enter nso rep email)"
-                : "À Safe Sport for Youth, nous sommes toujours heureux d'entendre nos membres. Vos commentaires nous permettent de modifier et d'améliorer nos programmes éducatifs, alors n'hésitez pas à nous faire part de vos commentaires. Veuillez nous contacter à : (entrer l'e-mail du représentant de l'organisme national sportif)"}
+                ? "At Safe Sport for Youth we are always happy to hear from our members. Your feedback allows us to modify and improve our educational programs so don't hold back on your comments. Please contact us at: "
+                : "À Safe Sport for Youth, nous sommes toujours heureux d'entendre nos membres. Vos commentaires nous permettent de modifier et d'améliorer nos programmes éducatifs, alors n'hésitez pas à nous faire part de vos commentaires. Veuillez nous contacter à : "}
+                <a href="mailto:hello@safesportforyouth.org">
+                hello@safesportforyouth.org
+              </a>
             </p>
           </div>
         </div>
