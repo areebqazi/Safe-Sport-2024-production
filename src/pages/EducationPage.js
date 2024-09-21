@@ -195,6 +195,7 @@ const EducationPage = () => {
         )
       );
     }
+
   };
 
   useEffect(() => {
@@ -217,6 +218,17 @@ const EducationPage = () => {
   const handleVideoEnded = (index) => {
     // Check if the user has finished watching the entire video
     console.log(`Video ${index + 1} fully watched!`);
+    if(index === videoData.length - 1) {  // Check if the last video has been watched
+      const sendCertificateAutomatically = async () => {
+        try {
+          const dataUrl = await toPng(divRef.current, { cache: false }); // Convert to PNG
+          sendCertificateByEmail(dataUrl);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
+      sendCertificateAutomatically();
+    }
     handleVideoCompletion(index);
   };
 
