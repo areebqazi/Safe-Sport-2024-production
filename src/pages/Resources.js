@@ -117,7 +117,7 @@ const Resources = () => {
 
                 <div className='logoandtextline'>
                     {/*  eslint-disable-next-line */}
-                    <a href='https://www.swimming.ca/en/safe-sport/ ' target="_blank"><img className="image-links3" src={SwimmingLogo} alt="Swimming Canada Logo" ></img> </a>
+                    <a href='https://{language === 'english' ? "www.swimming.ca/safesport/" : "www.swimming.ca/fr/sport-securitaire/"}' target="_blank"><img className="image-links3" src={SwimmingLogo} alt="Swimming Canada Logo" ></img> </a>
 
                     <h4>{language === 'english' ? "Swimming Canada's Safe Sport page" : "Page Safe Sport de Natation Canada"}</h4>
 
