@@ -13,35 +13,15 @@ function Footer() {
             <div className="footer-content">
                 {/* Left Section (Logos) */}
                 <div className="footer-logos">
-                    <a
-            href={`https://${
-              language === "english"
-                ? "www.swimming.ca/en/"
-                : "www.swimming.ca/fr/"
-            }`}
-            target="_blank" className="logo-link" rel="noopener noreferrer"
-          ><img className='swim-voll' src={require('../assets/logos/Swim_Canada_Logo.png')} alt="Logo 1" />
+                    <a href="https://www.swimming.ca/en/" target="_blank" rel="noopener noreferrer" className="logo-link">
+                        <img className='swim-voll' src={require('../assets/logos/Swim_Canada_Logo.png')} alt="Logo 1" />
                     </a>
                     <div className="vertical-line"></div>   
-                    <a
-            href={`https://${
-              language === "english"
-                ? "athletics.ca/"
-                : "athletics.ca/fr/"
-            }`}
-            target="_blank" className="logo-link" rel="noopener noreferrer"
-          >
+                    <a href="https://athletics.ca/" target="_blank" rel="noopener noreferrer" className="logo-link">
                         <img className='athlCan' src={require('../assets/logos/Athletics_Canada_Logo.png')} alt="Logo 2" />
                     </a>
                     <div className="vertical-line"></div>
-                    <a
-            href={`https://${
-              language === "english"
-                ? "volleyball.ca/"
-                : "volleyball.ca/fr"
-            }`}
-            target="_blank" className="logo-link" rel="noopener noreferrer"
-          >
+                    <a href="https://volleyball.ca/" target="_blank" rel="noopener noreferrer" className="logo-link">
                         <img className='swim-voll' src={require('../assets/logos/Volleyball_Canada_Logo.png')} alt="Logo 3" />
                     </a>
                 </div>
@@ -58,7 +38,7 @@ function Footer() {
 
                 {/* Right Section (Email and Phone) */}
                 <div className="footer-contact">
-                    <p>{language === 'english' ? "For inquiries please contact us at" : "Pour toute demande de renseignements, veuillez nous contacter à"}</p>
+                    <p>For inquiries please contact us at</p>
                     <p>Email: hello@safesportforyouth.org</p>
 
                 </div>
