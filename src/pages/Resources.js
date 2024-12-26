@@ -197,7 +197,11 @@ const Resources = () => {
         <div className="logoandtextline">
           {/*  eslint-disable-next-line */}
           <a
-            href=""
+            href={`https://${
+              language === "english"
+                ? "volleyball.ca/en/about/safe-sport/"
+                : "volleyball.ca/fr/a-propos/sport-securitaire/"
+            }`}
             target="_blank"
           >
             <img
