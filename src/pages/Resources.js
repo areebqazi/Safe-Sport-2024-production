@@ -103,119 +103,115 @@ const Resources = () => {
           <p className="logo-title">Text: 988</p>
         </div>
       </div>
-     <div className="content-section">
-  <h3>
-    {language === "english"
-      ? "Abuse Reporting Resources"
-      : "Ressources de signalement de mauvais traitements"}
-  </h3>
-  <p>
-    {language === "english"
-      ? "If you would like to file a complaint, need more information on where and how to file a complaint, or just want to talk to someone who can support you in the process please contact "
-      : "Si vous souhaitez déposer une plainte, avez besoin de plus d'informations sur où et comment déposer une plainte, ou si vous souhaitez simplement parler à quelqu'un qui peut vous soutenir dans le processus, veuillez contacter "}
-    abusefreesport.ca
-  </p>
-  <hr className="thickLine clearfix" /> {/* Horizontal line divider */}
-  <div>
-    <p className="logo-title">Abuse Free Sport</p>
-    {/* eslint-disable-next-line */}
-    <a
-      href={`https://${
-        language === "english" ? "abuse-free-sport.ca/" : "sport-sans-abus.ca/"
-      }`}
-      target="_blank"
-    >
-      <img
-        className="abuse-free image-links1"
-        src={AbuseFreeSport}
-        alt="Abuse Free Sport"
-      />
-    </a>
-    <p className="logo-title">
-      Email: info@abuse-free-sport.ca/info@sport-sans-abus.ca
-    </p>
-    <p className="logo-title">Text: 1-888-83SPORT (77678)</p>
-  </div>
-</div>
-<div className="content-section">
-  <h2>
-    {language === "english"
-      ? "Additional Resources"
-      : "Ressources supplémentaires"}
-  </h2>
-  <p>
-    {language === "english"
-      ? "If it's not an emergency and you need help or support, there's plenty of other options available to you."
-      : "S'il ne s'agit pas d'une urgence et que vous avez besoin d'aide ou de soutien, de nombreuses autres options s'offrent à vous."}
-  </p>
-  <p>
-    {language === "english"
-      ? "For Safe Sport information for the following sports (and please check out your club's or Provincial/Territorial Sporting Organizations website as well):"
-      : "Pour des informations sur le sport sécuritaire pour les sports suivants (et veuillez également consulter le site Web de votre club ou de votre organisation sportive Provincial/Territorial):"}
-  </p>
-  <hr className="thickLine clearfix" /> {/* Horizontal line divider */}
-  <div className="logoandtextline">
-    {/* eslint-disable-next-line */}
-    <a href="https://athletics.ca/safesport/" target="_blank">
-      <img
-        className="image-links3"
-        src={AthleticsLogo}
-        alt="Athletics Canada Logo"
-      />
-    </a>
-    <h4>
-      {language === "english"
-        ? "Athletics Canada's Safe Sport page"
-        : "Page sur le sport sécuritaire d'Athlétisme Canada"}
-    </h4>
-  </div>
-  <div className="logoandtextline">
-    {/* eslint-disable-next-line */}
-    <a
-      href={`https://${
-        language === "english"
-          ? "www.swimming.ca/safesport/"
-          : "www.swimming.ca/fr/sport-securitaire/"
-      }`}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <img
-        className="image-links3"
-        src={SwimmingLogo}
-        alt="Swimming Canada Logo"
-      />
-    </a>
-    <h4>
-      {language === "english"
-        ? "Swimming Canada's Safe Sport page"
-        : "Page Safe Sport de Natation Canada"}
-    </h4>
-  </div>
-  <div className="logoandtextline">
-    {/* eslint-disable-next-line */}
-    <a
-      href={`https://${
-        language === "english"
-          ? "volleyball.ca/en/about/safe-sport/"
-          : "volleyball.ca/fr/a-propos/sport-securitaire/"
-      }`}
-      target="_blank"
-    >
-      <img
-        className="image-links3"
-        src={VolleyballLogo}
-        alt="Volleyball Canada Logo"
-      />
-    </a>
-    <h4>
-      {language === "english"
-        ? "Volleyball Canada's Safe Sport page"
-        : "Page Safe Sport de Volleyball Canada"}
-    </h4>
-  </div>
-</div>
-
+      <div className="content-section">
+        <h3>
+          {language === "english"
+            ? "Abuse Reporting Resources"
+            : "Ressources de signalement de mauvais traitements"}
+        </h3>
+        <p>
+          {language === "english"
+            ? "If you would like to file a complaint, need more information on where and how to file a complaint, or just want to talk to someone who can support you in the process please contact "
+            : "Si vous souhaitez déposer une plainte, avez besoin de plus d'informations sur où et comment déposer une plainte, ou si vous souhaitez simplement parler à quelqu'un qui peut vous soutenir dans le processus, veuillez contacter "}
+          abusefreesport.ca
+        </p>
+        <hr className="thickLine clearfix" /> {/* Horizontal line divider */}
+        <div>
+          <p className="logo-title">Abuse Free Sport</p>
+          {/*  eslint-disable-next-line */}
+          <a
+            href={`https://${
+              language === "english"
+                ? "abuse-free-sport.ca/"
+                : "sport-sans-abus.ca/"
+            }`}
+            target="_blank"
+          >
+            <img
+              className="abuse-free image-links1"
+              src={AbuseFreeSport}
+              alt="Abuse Free Sport"
+            ></img>{" "}
+          </a>
+          <p className="logo-title">
+            Email: info@abuse-free-sport.ca/info@sport-sans-abus.ca
+          </p>
+          <p className="logo-title">Text: 1-888-83SPORT (77678)</p>
+        </div>
+      </div>
+      <div className="content-section">
+        <h2>
+          {language === "english"
+            ? "Additional Resources"
+            : "Ressources supplémentaires"}
+        </h2>
+        <p>
+          {language === "english"
+            ? "If it's not an emergency and you need help or support, there's plenty of other options available to you."
+            : "S'il ne s'agit pas d'une urgence et que vous avez besoin d'aide ou de soutien, de nombreuses autres options s'offrent à vous."}
+        </p>
+        <p>
+          {language === "english"
+            ? "For Safe Sport information for the following sports (and please check out your club`s or Provincial/Territorial Sporting Organizations website as well):"
+            : "Pour des informations sur le sport sécuritaire pour les sports suivants (et veuillez également consulter le site Web de votre club ou de votre organisation sportive Provincial/Territorial):"}
+        </p>
+        <hr className="thickLine clearfix" /> {/* Horizontal line divider */}
+        <div className="logoandtextline">
+          {/*  eslint-disable-next-line */}
+          <a href="https://athletics.ca/safesport/" target="_blank">
+            <img
+              className="image-links3"
+              src={AthleticsLogo}
+              alt="Athletics Canada Logo"
+            ></img>{" "}
+          </a>
+          <h4>
+            {language === "english"
+              ? "Athletics Canada's Safe Sport page"
+              : "Page sur le sport sécuritaire d'Athlétisme Canada"}
+          </h4>
+        </div>
+        <div className="logoandtextline">
+          {/*  eslint-disable-next-line */}
+          <a
+            href={`https://${
+              language === "english"
+                ? "www.swimming.ca/safesport/"
+                : "www.swimming.ca/fr/sport-securitaire/"
+            }`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              className="image-links3"
+              src={SwimmingLogo}
+              alt="Swimming Canada Logo"
+            />
+          </a>
+          <h4>
+            {language === "english"
+              ? "Swimming Canada's Safe Sport page"
+              : "Page Safe Sport de Natation Canada"}
+          </h4>
+        </div>
+        <div className="logoandtextline">
+          {/*  eslint-disable-next-line */}
+          <a
+            href=""
+            target="_blank"
+          >
+            <img
+              className="image-links3"
+              src={VolleyballLogo}
+              alt="Volleyball Canada Logo"
+            ></img>{" "}
+          </a>
+          <h4>
+            {language === "english"
+              ? "Volleyball Canada's Safe Sport page"
+              : "Page Safe Sport de Volleyball Canada"}
+          </h4>
+        </div>
         <hr className="thickLine clearfix" /> {/* Horizontal line divider */}
         {/* <h4>{language === 'english' ? "For some other resources:" : "Pour d'autres ressources:"}</h4> */}
         <br></br>
