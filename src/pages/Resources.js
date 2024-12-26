@@ -67,7 +67,11 @@ const Resources = () => {
           <p className="logo-title">Kids Help Phone</p>
           {/*  eslint-disable-next-line */}
           <a
-            href="https://kidshelpphone.ca/need-help-now-text-us/"
+            href={`https://${
+              language === "english"
+                ? "kidshelpphone.ca/need-help-now-text-us/"
+                : "jeunessejecoute.ca/besoin-daide-maintenant-envoie-nous-un-texto/"
+            }`}
             target="_blank"
           >
             <img
@@ -82,7 +86,14 @@ const Resources = () => {
         <div>
           <p className="logo-title">9-8-8 Suicide Crisis helpline:</p>
           {/*  eslint-disable-next-line */}
-          <a href="https://988.ca/" target="_blank">
+          <a
+            href={`https://${
+              language === "english"
+                ? "988.ca/"
+                : "988.ca/fr/"
+            }`}
+            target="_blank"
+          >
             <img
               className="image-links1"
               src={emergencyLogoB}
@@ -108,7 +119,14 @@ const Resources = () => {
         <div>
           <p className="logo-title">Abuse Free Sport</p>
           {/*  eslint-disable-next-line */}
-          <a href="https://abuse-free-sport.ca/" target="_blank">
+          <a
+            href={`https://${
+              language === "english"
+                ? "abuse-free-sport.ca/"
+                : "sport-sans-abus.ca/"
+            }`}
+            target="_blank"
+          >
             <img
               className="abuse-free image-links1"
               src={AbuseFreeSport}
@@ -178,7 +196,14 @@ const Resources = () => {
         </div>
         <div className="logoandtextline">
           {/*  eslint-disable-next-line */}
-          <a href="https://volleyball.ca/en/about/safe-sport/" target="_blank">
+          <a
+            href={`https://${
+              language === "english"
+                ? "volleyball.ca/en/about/safe-sport/"
+                : "volleyball.ca/fr/a-propos/sport-securitaire"
+            }`}
+            target="_blank"
+          >
             <img
               className="image-links3"
               src={VolleyballLogo}
@@ -209,7 +234,15 @@ const Resources = () => {
         </p>
         <hr className="thickLine clearfix" /> {/* Horizontal line divider */}
         {/*  eslint-disable-next-line */}
-        <a href="https://www.protectchildren.ca/en/" target="_blank">
+        <a href="https://" target="_blank">
+        <a
+            href={`https://${
+              language === "english"
+                ? "www.protectchildren.ca/en/"
+                : "www.protectchildren.ca/fr/"
+            }`}
+            target="_blank"
+          >
           <img className="image-links3" src={CCCPlogo} alt="CCCP Logo"></img>{" "}
         </a>
         <p>
