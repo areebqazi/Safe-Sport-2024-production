@@ -152,7 +152,7 @@ const Resources = () => {
         </p>
         <p>
           {language === "english"
-            ? "For Safe Sport information for the following sports (and please check out your club`s or Provincial/Territorial Sporting Organizations website as well):"
+            ? "For Safe Sport information for the following sports (and please check out your club s or Provincial/Territorial Sporting Organizations website as well):"
             : "Pour des informations sur le sport sécuritaire pour les sports suivants (et veuillez également consulter le site Web de votre club ou de votre organisation sportive Provincial/Territorial):"}
         </p>
         <hr className="thickLine clearfix" /> {/* Horizontal line divider */}
@@ -196,8 +196,14 @@ const Resources = () => {
         </div>
         <div className="logoandtextline">
           {/*  eslint-disable-next-line */}
-          
-          <a href="https://volleyball.ca/en/about/safe-sport/" target="_blank">
+          <a
+            href={`https://${
+              language === "english"
+                ? "volleyball.ca/en/about/safe-sport/"
+                : "volleyball.ca/fr/a-propos/sport-securitaire/"
+            }`}
+            target="_blank"
+          >
             <img
               className="image-links3"
               src={VolleyballLogo}
@@ -228,7 +234,15 @@ const Resources = () => {
         </p>
         <hr className="thickLine clearfix" /> {/* Horizontal line divider */}
         {/*  eslint-disable-next-line */}
-        <a href="https://www.protectchildren.ca/en/" target="_blank">
+        <a href="https://" target="_blank">
+        <a
+            href={`https://${
+              language === "english"
+                ? "www.protectchildren.ca/en/"
+                : "www.protectchildren.ca/fr/"
+            }`}
+            target="_blank"
+          >
           <img className="image-links3" src={CCCPlogo} alt="CCCP Logo"></img>{" "}
         </a>
         <p>
