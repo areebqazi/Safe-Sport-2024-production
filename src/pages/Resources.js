@@ -196,14 +196,8 @@ const Resources = () => {
         </div>
         <div className="logoandtextline">
           {/*  eslint-disable-next-line */}
-          <a
-            href={`https://${
-              language === "english"
-                ? "volleyball.ca/en/about/safe-sport/"
-                : "volleyball.ca/fr/a-propos/sport-securitaire"
-            }`}
-            target="_blank"
-          >
+          
+          <a href="https://volleyball.ca/en/about/safe-sport/" target="_blank">
             <img
               className="image-links3"
               src={VolleyballLogo}
@@ -234,15 +228,7 @@ const Resources = () => {
         </p>
         <hr className="thickLine clearfix" /> {/* Horizontal line divider */}
         {/*  eslint-disable-next-line */}
-        <a href="https://" target="_blank">
-        <a
-            href={`https://${
-              language === "english"
-                ? "www.protectchildren.ca/en/"
-                : "www.protectchildren.ca/fr/"
-            }`}
-            target="_blank"
-          >
+        <a href="https://www.protectchildren.ca/en/" target="_blank">
           <img className="image-links3" src={CCCPlogo} alt="CCCP Logo"></img>{" "}
         </a>
         <p>
