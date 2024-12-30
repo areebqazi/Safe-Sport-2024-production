@@ -9,6 +9,13 @@ import AoSlogo from "../assets/AoSLogo.png";
 import SwimmingLogo from "../assets/logos/Swim Canada Logo.png";
 import VolleyballLogo from "../assets/logos/Volleyball Canada Logo.jpg";
 import AthleticsLogo from "../assets/logos/Athletics Canada Logo.png";
+import enkidshelpLogo from '../assets/enkidshelp.png';
+import frkidshelpLogo from '../assets/frkidshelp.png';
+import enhelpline from '../assets/988helplineen.png';
+import frhelpline from '../assets/988helplinefr.png';
+import encpp from '../assets/CCCP-logo.png';
+import frcpp from '../assets/CCCP-logo-fr.png';
+
 import React, { useContext, useRef, useState } from "react";
 import { LanguageContext } from "../LanguageContext";
 // eslint-disable-next-line
@@ -76,7 +83,7 @@ const Resources = () => {
           >
             <img
               className="image-links2"
-              src={KidsHelpPhoneLogo}
+              src={language === 'english' ? enkidshelpLogo : frkidshelpLogo} 
               alt="Kids Helpphone"
             ></img>{" "}
           </a>
@@ -96,7 +103,7 @@ const Resources = () => {
           >
             <img
               className="image-links1"
-              src={emergencyLogoB}
+              src={language === 'english' ? enhelpline : frhelpline}
               alt="998 Helpline"
             ></img>{" "}
           </a>
@@ -243,7 +250,7 @@ const Resources = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-          <img className="image-links3" src={CCCPlogo} alt="CCCP Logo"></img>{" "}
+          <img className="image-links3" src={language === 'english' ? encpp : frcpp}  alt="CCCP Logo"></img>{" "}
         </a>
         <p>
           {language === "english"
