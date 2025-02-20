@@ -325,10 +325,10 @@ const Home = () => {
                 <option value="" disabled>
                   {language === "english" ? "Select a sport" : "Sélectionnez un sport"}
                 </option>
-                <option value="football">Athletics</option>
+                <option value="athletics">Athletics</option>
                 <option value="swimming">Swimming</option>
                 <option value="volleyball">Volleyball</option>
-                <option valye="other">Other</option>
+                <option value="other">Other</option>
               </select>
 
               <button type="submit" onClick={handleSignUp}>
