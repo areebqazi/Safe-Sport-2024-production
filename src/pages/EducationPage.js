@@ -69,6 +69,7 @@ const EducationPage = () => {
       console.log("User has watched all the videos!");
       setShowCongratulationsPopup(true);
       updateVideoStatus();
+      handleDownloadImage();
     }
   }, [videoStatus]);
 
