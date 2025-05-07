@@ -111,41 +111,103 @@ const Resources = () => {
         </div>
       </div>
       <div className="content-section">
-        <h3>
-          {language === "english"
-            ? "Abuse Reporting Resources"
-            : "Ressources de signalement de mauvais traitements"}
-        </h3>
-        <p>
-          {language === "english"
-            ? "If you would like to file a complaint, need more information on where and how to file a complaint, or just want to talk to someone who can support you in the process please contact "
-            : "Si vous souhaitez déposer une plainte, avez besoin de plus d'informations sur où et comment déposer une plainte, ou si vous souhaitez simplement parler à quelqu'un qui peut vous soutenir dans le processus, veuillez contacter "}
-          abusefreesport.ca
-        </p>
-        <hr className="thickLine clearfix" /> {/* Horizontal line divider */}
-        <div>
-          <p className="logo-title">Abuse Free Sport</p>
-          {/*  eslint-disable-next-line */}
-          <a
-            href={`https://${
-              language === "english"
-                ? "abuse-free-sport.ca/"
-                : "sport-sans-abus.ca/"
-            }`}
-            target="_blank"
-          >
-            <img
-              className="abuse-free image-links1"
-              src={AbuseFreeSport}
-              alt="Abuse Free Sport"
-            ></img>{" "}
-          </a>
-          <p className="logo-title">
-            Email: info@abuse-free-sport.ca/info@sport-sans-abus.ca
-          </p>
-          <p className="logo-title">Text: 1-888-83SPORT (77678)</p>
-        </div>
-      </div>
+  <h3>
+    {language === "english"
+      ? "Abuse Reporting Resources"
+      : "Ressources de signalement de mauvais traitements"}
+  </h3>
+
+  {language === "english" ? (
+    <>
+      <p>
+        If you are a member of a National Team program and would like to file a
+        complaint, need more information on where and how to file a complaint,
+        or just want to talk to someone who can support you in the process
+        please contact the Canadian Safe Sport Program (CSSP):
+      </p>
+      <p>
+        Report online:&nbsp;
+        <a
+          href="https://cces.ca/report-safe-sport"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          https://cces.ca/report-safe-sport
+        </a>
+      </p>
+      <p>Report by phone: 1-866-971-CSSP (2777)</p>
+      <p>
+        Get help and information: You can contact the CSSP team with questions
+        or for support here:&nbsp;
+        <a
+          href="https://cces.ca/contactCSSP"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          https://cces.ca/contactCSSP
+        </a>
+      </p>
+    </>
+  ) : (
+    <>
+      <p>
+        Si vous êtes membre d'un programme d'équipe nationale et souhaitez
+        déposer une plainte, avez besoin de plus d'informations sur où et
+        comment déposer une plainte, ou si vous souhaitez simplement parler à
+        quelqu'un qui peut vous soutenir dans le processus, veuillez contacter
+        le Programme canadien de sport sécuritaire (PCSS):
+      </p>
+      <p>
+        Signalement en ligne :&nbsp;
+        <a
+          href="https://cces.ca/fr/signalement-sport-securitaire"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          https://cces.ca/fr/signalement-sport-securitaire
+        </a>
+      </p>
+      <p>Signalement par téléphone : 1-866-971-2777</p>
+      <p>
+        Aide et information: Pour toute question ou demande d’assistance,
+        communiquez avec le PCSS au&nbsp;
+        <a
+          href="https://cces.ca/fr/joindrePCSS"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          https://cces.ca/fr/joindrePCSS
+        </a>
+      </p>
+    </>
+  )}
+
+  <hr className="thickLine clearfix" /> {/* Horizontal line divider */}
+  <div>
+    <p className="logo-title">Abuse Free Sport</p>
+    {/* eslint-disable-next-line */}
+    <a
+      href={`https://${
+        language === "english"
+          ? "abuse-free-sport.ca/"
+          : "sport-sans-abus.ca/"
+      }`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img
+        className="abuse-free image-links1"
+        src={AbuseFreeSport}
+        alt="Abuse Free Sport"
+      />
+    </a>
+    <p className="logo-title">
+      Email: info@abuse-free-sport.ca / info@sport-sans-abus.ca
+    </p>
+    <p className="logo-title">Text: 1-888-83SPORT (77678)</p>
+  </div>
+</div>
+
       <div className="content-section">
         <h2>
           {language === "english"
@@ -154,8 +216,8 @@ const Resources = () => {
         </h2>
         <p>
           {language === "english"
-            ? "If it's not an emergency and you need help or support, there's plenty of other options available to you."
-            : "S'il ne s'agit pas d'une urgence et que vous avez besoin d'aide ou de soutien, de nombreuses autres options s'offrent à vous."}
+            ? "If you are a member of a club and you need help or support, there's plenty of other options available to you."
+            : "Si vous êtes membre d'un club et vous avez besoin d'aide ou de soutien, de nombreuses autres options s'offrent à vous."}
         </p>
         <p>
           {language === "english"
