@@ -182,30 +182,7 @@ const Resources = () => {
     </>
   )}
 
-  <hr className="thickLine clearfix" /> {/* Horizontal line divider */}
-  <div>
-    <p className="logo-title">Abuse Free Sport</p>
-    {/* eslint-disable-next-line */}
-    <a
-      href={`https://${
-        language === "english"
-          ? "abuse-free-sport.ca/"
-          : "sport-sans-abus.ca/"
-      }`}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <img
-        className="abuse-free image-links1"
-        src={AbuseFreeSport}
-        alt="Abuse Free Sport"
-      />
-    </a>
-    <p className="logo-title">
-      Email: info@abuse-free-sport.ca / info@sport-sans-abus.ca
-    </p>
-    <p className="logo-title">Text: 1-888-83SPORT (77678)</p>
-  </div>
+  
 </div>
 
       <div className="content-section">
